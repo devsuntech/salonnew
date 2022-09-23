@@ -15,4 +15,4 @@ jobs:
         host: 164.52.212.187
         key: ${{ secrets.SSH_PASSWORD }}
         passphrase: salon@2022
-        script: 'cd /home/salon/public_html/salonnme.com/testlaravelsetup && bash ./server_deploy.sh'
+        script: 'cd /home/salon/public_html/salonnew && bash ./server_deploy.sh'

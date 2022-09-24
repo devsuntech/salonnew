@@ -114,13 +114,13 @@
                                     <div role="tabpane{{ $service->id }}" class="tab-pane @if($counter==1) active @endif" id="service{{ $service->id }}">
                                         @foreach(App\Models\VendorService::whereServiceId($service->id)->whereVendorId($vendor->id)->orderBy('position')->get() as $key => $vendorservice)
                                         <div class="service-list">
-                                            <label for="one">
+                                            <label for="{{$vendorservice->vendorservice->name}}">
                                                 
                                             
                                             <div class="list-sec row">
                                                 <div class="col-lg-9 service-name">
                                                     <div class="checkbox">
-                                                        <input type="checkbox" name="services[]" id="one" data-name="{{ $vendorservice->vendorservice->name }}" data-minimum_time="{{ $vendorservice->minimum_time  }}" data-price="{{ $vendorservice->price }}" value="{{ $vendorservice->id }}"/>
+                                                        <input type="checkbox" name="services[]" id="{{$vendorservice->vendorservice->name}}" data-name="{{ $vendorservice->vendorservice->name }}" data-minimum_time="{{ $vendorservice->minimum_time  }}" data-price="{{ $vendorservice->price }}" value="{{ $vendorservice->id }}"/>
                                                     </div>
                                                     <div>
                                                         <h4> {{ $vendorservice->vendorservice->name }} </h4>
@@ -322,26 +322,30 @@
                                 </div>
                              </label>
                             </div>
-                            <div class="service-list">
-                              <label for="servicedoor">
-                                <div class="list-sec row">
-                                    <div class="col-lg-9 service-name">
-                                        <div class="staff-img2">
-                                            <div class="img-avtar">
-                                                <i class="far fa-users"></i>
+                            @if (in_array('Home Appointment',explode(' ', $vendor->amenities)))
+                                <div class="service-list">
+                                    <label for="servicedoor">
+                                        <div class="list-sec row">
+                                            <div class="col-lg-9 service-name">
+                                                <div class="staff-img2">
+                                                    <div class="img-avtar">
+                                                        <i class="far fa-users"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4>Booking for Home</h4>
+                                                    <span>Service @Doorstep</span>
+                                                </div>
+                                            </div>
+                                            <div class="checkbox col-lg-3 text-right">
+                                                <input type="radio" value="home" name="service_location_done"
+                                                    id="servicedoor" />
                                             </div>
                                         </div>
-                                        <div>
-                                            <h4>Booking for Home</h4>
-                                            <span>Service @Doorstep</span>
-                                        </div>
-                                    </div>
-                                    <div class="checkbox col-lg-3 text-right">
-                                        <input type="radio" value="home"  name="service_location_done" id="servicedoor"/>
-                                    </div>
+                                    </label>
                                 </div>
-                                </label>
-                            </div>
+                            @endif
+                          
                         </div>
                     </div>
 
@@ -359,11 +363,11 @@
                                     Review and Confirm
                                 </h2>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <button type="button" class="ml-auto btn-next btn arrow-btn" wire:click="submitForm">
                                     <i class="fas fa-angle-right arrow"></i>
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="book__wrapper white-bg">

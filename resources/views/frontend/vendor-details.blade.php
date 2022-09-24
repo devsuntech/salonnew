@@ -278,7 +278,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="review-form ">
+                                {{-- <div class="review-form ">
                                     <h5 class="has-border mb-27 ">Write a Review</h5>
                                     <form action="# ">
                                         <div class="content-bottom pb-43 ">
@@ -370,7 +370,100 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
+                                {{-- <div class="review-form ">
+                                    <h5 class="has-border mb-27 ">Write a Review</h5>
+                                    <form action="# ">
+                                        <div class="content-bottom pb-43 ">
+                                            <div class="review-rating-wrapper d-inline-block mr-45 ">
+                                                <div class="single-rating mb-5-px ">
+                                                    <div class="rating rating-3 ">
+                                                        <span>Rating</span>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fal fa-star icon-default "></i>
+                                                    </div>
+                                                </div>
+                                                <div class="single-rating mb-5-px ">
+                                                    <div class="rating rating-3 ">
+                                                        <span>Services</span>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fal fa-star icon-default "></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-rating-wrapper d-inline-block ">
+                                                <div class="single-rating mb-5-px ">
+                                                    <div class="rating rating-3 ">
+                                                        <span>Hospitality</span>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fal fa-star icon-default "></i>
+                                                    </div>
+                                                </div>
+                                                <div class="single-rating mb-5-px ">
+                                                    <div class="rating rating-3 ">
+                                                        <span>Pricing</span>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fas fa-star icon-default "></i>
+                                                        <i class="fal fa-star icon-default "></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="review-main mb-50 mb-lg-0 ">
+                                            <div class="row custom-row-2 ">
+                                                <div class="col-xl-6 custom-col-2 ">
+                                                    <div class="input-group mb-20 ">
+                                                        <input type="text " placeholder="Title of your Review " name="rtitle " class="input-default ">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 custom-col-2 ">
+                                                    <div class="input-group mb-20 ">
+                                                        <input type="text " placeholder="Website name " name="wname " class="input-default ">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 custom-col-2 ">
+                                                    <div class="input-group mb-20 ">
+                                                        <input type="text " placeholder="Enter full name " name="fname " class="input-default ">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 custom-col-2 ">
+                                                    <div class="input-group mb-20 ">
+                                                        <input type="email " placeholder="Your email " name="fname " class="input-default ">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 custom-col-2 ">
+                                                    <div class="input-group mb-25 ">
+                                                        <textarea name="message " class="textarea-default " id="message " cols="30 " rows="10 ">Enter message</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 custom-col-2 ">
+                                                    <div class="form-group mb-20 ">
+                                                        <div class="review-condition ">
+                                                            <input type="checkbox " name="condition " id="condition ">
+                                                            <label for="condition ">Save my name, email, and website in
+                                                                this browser for the next time I comment.</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 custom-col-2 ">
+                                                    <button type="submit " class="btn-default ">Submit Now <i
+                                                            class="fal fa-paper-plane "></i> </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> --}}
                             </div>
                             <div class="col-xl-4 col-lg-5 ">
                                 <div class="sidebar-wrapper ">
@@ -431,14 +524,14 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="single-widget d-inline-block d-lg-block ">
+                                    {{-- <div class="single-widget d-inline-block d-lg-block ">
                                         <h4 class="widget-title mb-0 "><span>//</span> Sponsord Add</h4>
                                         <div class="sponsor-thumb ">
                                             <a href="listing-details.html ">
                                                 <img src="{{ asset('stoage/frontend/assets/img/banner/banner-2.jpg') }} " class="img-fluid " alt=" ">
                                                 <div class="sponsor-sm-thumb ">
                                                     <span>290x240</span>
-                                                </div>
+                                                </div> --}}
                                             </a>
                                         </div>
                                     </div>

@@ -77,6 +77,7 @@
 
     </nav>
 
+
     <div class="sign-up-area pb-100 pt-100 fix">
         <div class="row justify-content-center container">
             <div class="col-xl-7 col-lg-7 ">
@@ -258,7 +259,7 @@
                             @endphp
                             @while(true)
                             <div class="service-list">
-                              <label for="timeid">
+                              <label for="{{ Carbon::parse($slot_time)->format('H:i') }}">
                                 <div class="list-sec row">
                                     <div class="col-lg-9 service-name">
                                         <div>
@@ -266,7 +267,7 @@
                                         </div>
                                     </div>
                                     <div class="checkbox col-lg-3 text-right">
-                                        <input type="radio" value="{{ Carbon::parse($slot_time)->format('H:i') }}" name="time" id="timeid"/>
+                                        <input type="radio" value="{{ Carbon::parse($slot_time)->format('H:i') }}" name="time" id="{{ Carbon::parse($slot_time)->format('H:i') }}"/>
                                     </div>
                                 </div>
                                 </label>
@@ -322,7 +323,7 @@
                                 </div>
                              </label>
                             </div>
-                            @if (in_array('Home Appointment',explode(' ', $vendor->amenities)))
+                            @if (in_array("Home Appointment",json_decode($vendor->amenities)))
                                 <div class="service-list">
                                     <label for="servicedoor">
                                         <div class="list-sec row">
@@ -363,11 +364,11 @@
                                     Review and Confirm
                                 </h2>
                             </div>
-                            {{-- <div>
+                            <div>
                                 <button type="button" class="ml-auto btn-next btn arrow-btn" wire:click="submitForm">
-                                    <i class="fas fa-angle-right arrow"></i>
+                                    {{-- <i class="fas fa-angle-right arrow"></i> --}}
                                 </button>
-                            </div> --}}
+                            </div>
                         </div>
 
                         <div class="book__wrapper white-bg">

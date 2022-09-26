@@ -163,7 +163,7 @@
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="sign__input-wrapper mb-25">
-                                    <h5>Email/Mobile</h5>
+                                    <h5>Email/Mobile    </h5>
                                     <div class="sign__input">
                                         <input type="number" name="mobile" value="{{ old('mobile') }}" placeholder="9024548779">
                                         <i class="fal fa-phone"></i>

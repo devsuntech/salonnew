@@ -257,7 +257,7 @@
                         <div class="offer-sec mb-30 discount-sec">
                             <a href="{{ route('vendor.detail',$vendor->slug) }}">
                             <div class="thumb">
-                                <img src="{{ asset('storage/'.$vendor->feature_image) }}" alt="image">
+                                <img src="{{$vendor->feature_image ? asset('storage/'.$vendor->feature_image) : '/public/placeholdersalon.png' }}"  alt="image">
                             </div>
                             </a>
                             <div class="content">
@@ -304,7 +304,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                             <div class="featured-wrap mb-30">
                                 <div class="thumb">
-                                    <img src="{{ asset('storage/'.$vendor->feature_image) }}" alt="{{$vendor->firm_name}}">
+                                    <img src="{{$vendor->feature_image ? asset('storage/'.$vendor->feature_image) : '/public/placeholdersalon.png' }}"  alt="image">
                                 </div>
                                 <div class="content f-content">
                                     <div class="icon">

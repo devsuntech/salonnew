@@ -68,7 +68,7 @@
                                 @else
                                     <label>Discount</label>
                                 @enderror
-                                <input type="number" class="form-control" name="discount" value="{{ old('dicount') }}"placeholder="Enter Discount">
+                                <input type="number" class="form-control" name="discount" value="{{ old('dicount') }}"placeholder="Enter Discount" required>
                             </div>
                             <div class="form-group">
                                 @error('minimum_booking_value')

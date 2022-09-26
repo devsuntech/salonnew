@@ -59,9 +59,7 @@
                                 @else
                                     <label>Description</label>
                                 @enderror
-                                <textarea
-                                class="form-control" rows="3" name="description"
-                                    placeholder="Enter Description ...">{{ old('description') }}</textarea>
+                                <textarea class="form-control" rows="3" name="description" placeholder="Enter Description ..."  >{{ old('description') }}</textarea>
                             </div>
                         </div>
                         <!-- /.card-body -->

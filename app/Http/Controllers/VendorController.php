@@ -52,8 +52,8 @@ class VendorController extends Controller
             'mobile'=> 'required|string|max:10|unique:App\Models\User',
             'whatsapp_number'=> 'required|string|max:10',
             'email'=> 'required|email|unique:App\Models\User',
-            'gst_number'=> 'nuulable|string',
-            'thumbnail'=> 'nuulable|mimes:png,jpg,jpeg,svg,gif|max:300|min:10',
+            'gst_number'=> 'nullable|string',
+            'thumbnail'=> 'nullable|mimes:png,jpg,jpeg,svg,gif|max:300|min:10',
             'feature_image'=> 'required|mimes:png,jpg,jpeg,svg,gif|max:300|min:10',
             'gst_file'=> 'required|mimes:png,jpg,jpeg,svg,gif,pdf|max:300|min:10',
             'about_firm'=> 'required|string',
@@ -116,8 +116,8 @@ class VendorController extends Controller
               {
                 $data->thumbnail = $request->thumbnail->store('uploads/vendor/thumbnail', 'public');
              }
-             $data->added_by_id= Auth::user()->id;
-             $data->added_by=Auth::user()->user_type;
+            //  $data->added_by_id= Auth::user()->id;
+            //  $data->added_by=Auth::user()->user_type;
             if($data->save())
             {
                 return back()->with('success','Vendor created successfully !!');

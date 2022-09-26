@@ -43,7 +43,7 @@ class PackageController extends Controller
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric',
             'position'=>'required|numeric',
-            'description'=>'nullable|string',
+            'description'=>'required|string',
 
         ]);
         $data=new Package;

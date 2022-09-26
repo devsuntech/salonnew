@@ -30,7 +30,12 @@
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}"placeholder="Enter Service Name">
                             </div>
                             <div class="form-group">
-                                <label>Select Category</label>
+                                @error('category')
+                                <label class="messages text-danger">{{ $errors->first('category') }}</label>
+                            @else
+                            <label>Select Category</label>
+                            @enderror
+                            
                                 <select class="form-control select2" style="width: 100%;" name="category">
                                     <option value="">Select Category</option>
                                     @foreach (App\Models\Category::orderBy('name')->get() as $cat )

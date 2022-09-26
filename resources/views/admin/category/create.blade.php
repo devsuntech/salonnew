@@ -36,7 +36,7 @@
                                     <label>Meta Title</label>
                                 @enderror
 
-                                <input type="text" class="form-control" name="meta_title"  value="{{ old('meta_title') }}" placeholder="Enter Meta Title">
+                                <input type="text" class="form-control" name="meta_title"  value="{{ old('meta_title') }}" placeholder="Enter Meta Title" required>
                             </div>
                             <div class="form-group">
                                 @error('meta_description')
@@ -47,7 +47,7 @@
 
                                 <input type="text" class="form-control" name="meta_description"
                                 value="{{ old('meta_description') }}"
-                                    placeholder="Enter Meta Description">
+                                    placeholder="Enter Meta Description" required>
                             </div>
                             <div class="form-group">
                                 @error('description')
@@ -79,7 +79,7 @@
 
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="icon">
+                                        <input type="file" class="custom-file-input" name="icon" required>
                                         <label class="custom-file-label">Choose Icon</label>
                                     </div>
                                 </div>

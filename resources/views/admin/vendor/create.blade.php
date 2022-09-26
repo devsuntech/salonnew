@@ -103,7 +103,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Select Service For</label>
+                            @error("serviceFor")
+                            <label class="messages text-danger">{{ $errors->first('serviceFor') }}</label>
+                               @else 
+                               <label>Select Service For</label>
+                            @enderror
+                            
                             <select class="form-control select2" style="width: 100%;" name="serviceFor">
                                 <option value="">Select Service For</option>
                                 <option value="Male" @if(old('serviceFor')=='Male') selected @endif>Male</option>

@@ -42,7 +42,7 @@ class PageController extends Controller
             'description'=> 'required|string',
             'header_img'=> 'required|mimes:png,jpg,jpeg,svg,gif|max:130|min:10',
             'meta_title'=> 'required|string|max:255',
-            'position'=>'nullable|numeric',
+            'position'=>'required|numeric',
             'meta_description'=> 'required|string',
         ]);
         $data= new Page();

@@ -163,7 +163,7 @@
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
                                 <div class="sign__input-wrapper mb-25">
-                                    <h5>Email</h5>
+                                    <h5>Email/Mobile</h5>
                                     <div class="sign__input">
                                         <input type="number" name="mobile" value="{{ old('mobile') }}" placeholder="9024548779">
                                         <i class="fal fa-phone"></i>
@@ -178,8 +178,8 @@
                                         <input type="text" name="password" value="{{ old('password') }}" placeholder="Password">
                                         <i class="fal fa-lock"></i>
                                     </div>
-                                    @error('mobile')
-                                    <label class="messages text-danger">{{ $errors->first('mobile') }}</label>
+                                    @error('password')
+                                    <label class="messages text-danger">{{ $errors->first('password') }}</label>
                                     @enderror
                                 </div>
                                 <div class="sign__action d-sm-flex justify-content-between mb-30">

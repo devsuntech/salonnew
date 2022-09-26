@@ -100,6 +100,7 @@ Route::post('getservice',[HomeController::class,'getService'])->name('getservice
 Route::post('getSubService',[HomeController::class,'getSubService'])->name('getSubService');
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['customer']], function () {
     Route::get('profile',[HomeController::class,'userProfile'])->name('profile');
+    Route::post('profile',[HomeController::class,'userProfileupdate'])->name('userProfileupdate');
 });
 
 //Pages

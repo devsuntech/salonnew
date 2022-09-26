@@ -74,31 +74,32 @@
 
             <div class="col-xl-8 order-xl-2">
                 <div class="profile__wrapper white-bg">
+                    <form method="post" action="">
+                        @csrf
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">My account</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">Update</a>
+                                <button type="submit" class="btn btn-sm btn-primary">Update</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="">
                             <h6 class="heading-small text-muted mb-4">User information</h6>
                             <div class="">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-username">Username</label>
-                                            <input type="text" value="{{ Str::random(7) }}" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
+                                            <input type="text" value="{{ Str::random(7) }}" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse" disabled>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Email address</label>
-                                            <input type="email" {{ Auth::user()->email }} id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
+                                            <input type="email" name="email" value="{{Auth::user()->email }}"  id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com" required>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +162,7 @@
                             <h6 class="heading-small text-muted mb-4">About me</h6>
                             <div class="">
                                 <div class="form-group focused">
-                                    <label>About Me</label>
+                                    {{-- <label>About Me</label> --}}
                                     <textarea rows="4" class="form-control form-control-alternative" name="about_me" placeholder="A few words about you ...">{{ Auth::user()->customer->about_me }}</textarea>
                                 </div>
                             </div>

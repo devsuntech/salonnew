@@ -7,6 +7,8 @@ use App\Models\Page;
 use App\Models\Service;
 use App\Models\SubService;
 use App\Models\Vendor;
+use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VendorCoupon;
@@ -129,6 +131,26 @@ class HomeController extends Controller
     public function userProfile()
     {
        return view('frontend.user-profile');
+    }
+
+    public function userProfileupdate(Request $request)
+    {
+        // dd($request->email);
+        $id= Auth::user()->id;
+        $userData = ["email"=>$request->email,"name"=>"$request->first_name $request->last_name"];
+        $userQuery = User::where('id',$id)->update($userData);
+        // dd($userQuery);
+        $addressData = [
+            "address" => $request->address,
+            "city" => $request->city,
+            "state" => $request->state,
+            "country" => $request->country,
+            "pincode" => $request->pin_code,
+            "about_me" => $request->about_me
+        ];
+        $customerQuery= Customer::where('user_id',$id)->update($addressData);
+        return redirect()->back();
+    //    return view('frontend.user-profile');
     }
 
     public function logout(Request $request) {

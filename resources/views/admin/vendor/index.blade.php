@@ -53,7 +53,7 @@
                           <label class="custom-control-label" for="featured{{$key}}"></label>
                         </div>
                     </td>
-                    <td>{{ $data->firm_address }}, {{ $data->city->name }}, {{ $data->state->name }}, {{ $data->country_id }}</td>
+                    <td>{{ $data->firm_address }}, {{optional($data->city)->name }}, {{optional($data->state)->name }}, {{ $data->country_id }}</td>
                     <td>{{ \Carbon\Carbon::parse($data->updated_at)->format('jS F Y')}} </td>
                     <td>
                         <a class="btn btn-info" href="{{ route('admin.vendor.edit',$data->id) }}" >Edit</a>

@@ -169,6 +169,7 @@ class VendorController extends Controller
      */
     public function update(Request $request,$id)
     {
+        // dd($request);
         $request->validate([
             'name'=> 'required|string|max:255',
             'firm_name'=> 'required|string',
@@ -226,7 +227,7 @@ class VendorController extends Controller
             else{
                 $data->payment_methods="[]";
             }
-            $data->feature_image=$request->feature_image;
+            // $data->feature_image=$request->feature_image;
             $data->pincode=$request->pincode;
             $data->tag_line=$request->tag_line;
 
@@ -236,14 +237,14 @@ class VendorController extends Controller
              }
              if($request->hasFile('feature_image'))
              {
-                $data->feature_image = $request->feature_image->store('uploads/vendor/feature', 'public');
+                $data->feature_image = dd($request->feature_image->store('uploads/vendor/feature', 'public'));
               }
               if($request->hasFile('thumbnail'))
               {
                 $data->thumbnail = $request->thumbnail->store('uploads/vendor/thumbnail', 'public');
              }
 
-
+            //  dd($data);
             if($data->save())
             {
                 return back()->with('success','Vendor created successfully !!');

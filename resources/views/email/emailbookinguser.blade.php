@@ -16,7 +16,7 @@
                                     <table>
                                         <tr>
                                             <td valign="top" style="text-align: center; padding: 20px;">
-                                                <img src="{{ $message->embed(public_path()."/storage/emailimage/confirmation.png") }}" class="img-fluid hurray" />
+                                                <img src="{{ $message->embed(public_path()."/emailimage/confirmation.png") }}" class="img-fluid hurray" />
                                                 <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-size: 30px; line-height: 36px; color: #ffffff; font-weight: bold;">Your Booking is confirmed! </h1>
                                             </td>
                                         </tr>
@@ -72,7 +72,7 @@
                 <td bgcolor="#ffffff">
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"> <br>
                         <tr>
-                            <td align="center"> <img src="{{ $message->embed(public_path()."/storage/emailimage/SalonNme-01.png.png") }}" style="display: block; border: 0px;" class="logo" /> </td>
+                            <td align="center"> <img src="{{ $message->embed(public_path()."/emailimage/SalonNme-01.png.png") }}" style="display: block; border: 0px;" class="logo" /> </td>
                         </tr>
 
                         <tr>

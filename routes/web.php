@@ -48,7 +48,7 @@ Route::get('/clear', function () {
 
 Route::get('/sendemail', function () {
     
-    // Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailBookingOwner('Sunnny'));
+    Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailBookingOwner('Sunnny'));
     // Mail::to('innmsanil@gmail.com')->send(new EmailBookingUser());
     // Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailWelcomeOwner());
     // Mail::to('innmsanil@gmail.com')->send(new EmailWelcomeUser());

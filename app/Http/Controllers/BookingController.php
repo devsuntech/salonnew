@@ -55,7 +55,7 @@ class BookingController extends Controller
         ];
         $booking->fill($booking_data)->save();
         $booking->bookingDetail()->saveMany($this->prepareBookingDetailArray($validated));
-
+        Mail::to(Auth::user()->email)->send(new EmailBookingUser());
         return response()->json($booking);
     }
 
@@ -118,7 +118,7 @@ class BookingController extends Controller
         ])->id;
         $booking->save();
         $booking->bookingDetail()->saveMany($this->prepareBookingDetailArray($validated));
-        Mail::to(Auth::user()->email)->send(new EmailBookingUser());
+        
         return response()->json($booking);
     }
 

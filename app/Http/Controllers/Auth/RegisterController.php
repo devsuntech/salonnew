@@ -10,7 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-
+use App\Mail\EmailWelcomeUser;
+use Illuminate\Support\Facades\Mail;
 class RegisterController extends Controller
 {
     /*
@@ -72,11 +73,12 @@ class RegisterController extends Controller
             $customer->pincode=$request->pin_code;
             $customer->status=1;
             if($customer->save()) {
+                Mail::to($request->email)->send(new EmailWelcomeUser());
                return redirect()->route('login')->with('success','You are successfully register');
             } else{
                return back()->with('error','Something Went Wrong');
             }
-            $user->notify(new UserWelcome());
+            // $user->notify(new UserWelcome());
         } else{
             return back()->with('error','Something Went Wrong');
         }

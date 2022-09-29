@@ -9,7 +9,9 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
-
+use App\Mail\EmailBookingOwner;
+use App\Mail\EmailBookingUser;
+use Illuminate\Support\Facades\Mail;
 class BookingController extends Controller
 {
     /**
@@ -166,7 +168,8 @@ class BookingController extends Controller
         $booking->booking_status = 'Confirmed';
         $booking->online_payment_method_data = $razorpay_payment_data;
         $booking->save();
-        
+        // Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailBookingOwner('Sunnny'));
+        Mail::to(Auth::user()->email)->send(new EmailBookingUser());
         return $booking;
     }
 

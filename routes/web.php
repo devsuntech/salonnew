@@ -23,6 +23,10 @@ use App\Http\Controllers\VendorServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PackageController;
 use Illuminate\Support\Facades\Route;
+use App\Mail\EmailBookingOwner;
+use App\Mail\EmailBookingUser;
+use App\Mail\EmailWelcomeOwner;
+use App\Mail\EmailWelcomeUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +45,17 @@ Route::get('/clear', function () {
     \Artisan::call('route:clear');
     dd('clear');
 });
+
+Route::get('/sendemail', function () {
+    
+    // Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailBookingOwner('Sunnny'));
+    // Mail::to('innmsanil@gmail.com')->send(new EmailBookingUser());
+    // Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailWelcomeOwner());
+    // Mail::to('innmsanil@gmail.com')->send(new EmailWelcomeUser());
+});
+
+
+
 
 Route::get('simple',[CategoryController::class,'simple']);
 // Frontend

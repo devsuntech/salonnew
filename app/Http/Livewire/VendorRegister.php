@@ -12,6 +12,8 @@ use Str;
 use App\Models\City;
 use App\Models\State;
 use Session;
+use App\Mail\EmailWelcomeOwner;
+use Illuminate\Support\Facades\Mail;
 class VendorRegister extends Component
 {
     use WithFileUploads;
@@ -71,6 +73,7 @@ class VendorRegister extends Component
 
     public function submitForm()
     {
+        // dd($this->email);
         $validatedData = $this->validate([
             'service_for' => 'required',
             'service_type' => 'required',
@@ -139,10 +142,11 @@ class VendorRegister extends Component
 
 
         $this->successMessage = 'You salon is registred successfully.';
-
+        Mail::to($this->email)->send(new EmailWelcomeOwner());
         $this->clearForm();
 
         $this->currentStep = 1;
+  
         return redirect()->route('vendor.login')->with('success','You salon is registred successfully.');
     }
 

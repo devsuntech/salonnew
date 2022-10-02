@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/SalonNme-01.png.png">
@@ -61,27 +61,57 @@
             display: block;
             color: #777777;
         }
+
+        @media (min-width: 300px) { 
+    
+            .toppostitoncustom{
+                margin-top: 168px !important;
+            }
+         }
+
+        
+        @media (min-width: 768px) {  
+   
+            .toppostitoncustom{
+                margin-top: 168px !important;    
+            }
+        }
+
+
+        @media (min-width: 992px) { 
+
+            .toppostitoncustom{
+                margin-top: 100px !important;
+            }
+
+            .toppostitoncustomdown{
+                margin-top: 100px;
+            }
+         }
+
+        
+        @media (min-width: 1200px) { 
+            .toppostitoncustom{
+                margin-top: 100px;
+            }
+            .toppostitoncustomdown{
+                margin-top: 100px;
+            }
+         }
     </style>
 </head>
 
 <body style="background-color: #f2f2f7;">
+    <div class="booking-nav">
+            
+        <h2>Book Your Appointment</h2>
 
-    <nav>
+    </div>
+    <div class="container-fluid">
 
-        <div class="booking-nav container-fluid">
-
-            <h2>Book Your Appointment</h2>
-
-        </div>
-
-
-    </nav>
-
-
-    <div class="sign-up-area pb-100 pt-100 fix">
-        <div class="row justify-content-center container">
-            <div class="col-xl-7 col-lg-7 ">
-                <form class="row" id="booking-form">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7 toppostitoncustom" >
+                <form class="" id="booking-form">
                     <input type="hidden" value="<?= $vendor->id; ?>"  name="vendor_id" />
                     <div class="col-xl-12 col-lg-12 form-step form-step-active">
                         <div class="service-progress ">
@@ -98,7 +128,7 @@
                             </div>
                         </div>
 
-                        <div class="scroll-card scroll-z-depth">
+                        <div class="">
                             <div class="scroll-tabs scroll-tabs-bg book__wrapper white-bg" scroll="true">
                                 <ul class="nav nav-tabs" role="tablist">
                                     @foreach (App\Models\Service::havingCategories((array) $vendor->services)->get()  as $key=>$service)
@@ -476,8 +506,8 @@
             </div>
 
 
-            <div class="col-xl-5 col-lg-5">
-                <div class="book__wrapper white-bg cart">
+            <div class="col-xl-5 col-lg-5 toppostitoncustomdown" >
+                <div class="book__wrapper white-bg ">
                     <div class="book__form">
 
                         <div class="salon-img-icon">
@@ -511,6 +541,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
 
 

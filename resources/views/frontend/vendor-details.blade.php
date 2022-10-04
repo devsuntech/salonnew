@@ -35,10 +35,10 @@
                                                     <i class="fas fa-star icon-default"></i>
                                                     <i class="fal fa-star icon-default"></i>
                                                 </div>
-                                                <div class="duration d-inline-block">
+                                                {{-- <div class="duration d-inline-block">
                                                     <i class="fal fa-clock icon-default"></i><span> Posted 8 hours
                                                         ago</span>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -54,13 +54,13 @@
                                                         href="listing-details.html">Spa</a></span>
                                             </div>
                                             <div class="price">
-                                                <i class="fal fa-usd-circle  icon-default"></i> <span>$100 - $5k</span>
+                                                <i class="fal fa-usd-circle  icon-default"></i> <span> ₹100 -  ₹5k</span>
                                             </div>
                                         </div>
                                         <div class="content-2 f-left">
                                             <div class="news-action flex-md-column">
-                                                <a href="listing-details.html" class="f-sm-btn"><i
-                                                        class="fal fa-heart"></i></a>
+                                                {{-- <a href="listing-details.html" class="f-sm-btn"><i
+                                                        class="fal fa-heart"></i></a> --}}
                                                 <a href="#" class="f-sm-btn"><i class="fal fa-share-alt"></i></a>
                                             </div>
                                         </div>
@@ -76,16 +76,16 @@
                     <div class="news-description">
                         <div class="row">
                             <div class="col-xl-8 col-lg-7">
-                                <div class="desc-box  mb-16">
+                                {{-- <div class="desc-box  mb-16">
                                     <p>
                                         <span class="first-letter">{!! $vendor->about_firm[0] !!}</span>
                                         {!! $vendor->about_firm !!}
                                     </p>
-                                </div>
+                                </div> --}}
 
-                                <hr class="mt-47 mb-45">
+                                {{-- <hr class="mt-47 mb-45"> --}}
                                 <div class="info">
-                                    <div class="service-wrapper">
+                                    {{-- <div class="service-wrapper">
                                         <div class="single-service">
                                             <div class="service-icon f-left"><i class="fal fa-home-lg-alt"></i></div>
                                             <div class="service-desc fix">
@@ -107,13 +107,13 @@
                                                 <p>Cancel before 3:00 PM on Dec 1 and get a 50% refund, minus the first night and<br> service fee. Get details</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 
 
 
-                                <hr class="mt-45 mb-45">
+                                {{-- <hr class="mt-45 mb-45"> --}}
                                 <div class="service-cat-list">
                                     <ul class="pr-35">
                                         <li>
@@ -192,7 +192,7 @@
 
 
                                 <div class="bookwStaff">
-                                    <h5>Book With Staff</h5>
+                                    {{-- <h5>Book With Staff</h5> --}}
                                     <div class="row staff">
                                         @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
                                         <div class="col-lg-3 Staff text-center">
@@ -213,7 +213,7 @@
 
 
 
-                                <hr class="mt-20 mb-45 ">
+                                {{-- <hr class="mt-20 mb-45 "> --}}
                                 <div class="review-box pb-36 ">
                                     <h5 class="has-border mb-40 ">User Reviews</h5>
                                     <div class="review-list ">
@@ -491,7 +491,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="single-widget widget-padding mb-30 ">
+                                    {{-- <div class="single-widget widget-padding mb-30 ">
                                         <h4 class="widget-title "><span>//</span> Business Hours</h4>
                                         <ul class="duration-list ">
                                             <li>
@@ -523,7 +523,7 @@
                                                 <span class="off-day ">Off Day</span>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                     {{-- <div class="single-widget d-inline-block d-lg-block ">
                                         <h4 class="widget-title mb-0 "><span>//</span> Sponsord Add</h4>
                                         <div class="sponsor-thumb ">

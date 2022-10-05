@@ -25,9 +25,9 @@
                 </div>
             @else
                 <div class="news-slider">
-                    <img src="/placeholdersalon.png" alt="1">
-                    <img src="/placeholdersalon.png" alt="2">
-                    <img src="/placeholdersalon.png" alt="3">
+                    <img src="/public/placeholdersalon.png" alt="1">
+                    <img src="/public/placeholdersalon.png" alt="2">
+                    <img src="/public/placeholdersalon.png" alt="3">
                 </div>
             @endif
 

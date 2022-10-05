@@ -1,18 +1,37 @@
 @extends('frontend.layouts.app')
-@section('meta_title',$vendor->firm_name)
-@section('meta_description',$vendor->firm_name)
+@section('meta_title', $vendor->firm_name)
+@section('meta_description', $vendor->firm_name)
 @section('content')
     @include('frontend.includes.other-header')
     <div class="clearfix"></div>
     <main class="pt-100">
         <div class="listing-details-area pb-100">
-            <div class="news-slider">
-                @foreach (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->get() as $key=>$gallery)
+            {{-- <div class="news-slider">
+                @foreach (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->get() as $key => $gallery)
                 <div class="news-thumb">
                     <img src="{{ asset('storage/'.$gallery->image) }}" alt="{{ $vendor->firm_name.$gallery->id }}">
                 </div>
                 @endforeach
-            </div>
+            </div> --}}
+
+            @if (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->count())
+                <div class="news-slider">
+                    @foreach (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->get() as $key => $gallery)
+                        <div class="news-thumb">
+                            <img src="{{ asset('storage/' . $gallery->image) }}"
+                                alt="{{ $vendor->firm_name . $gallery->id }}">
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="news-slider">
+                    <img src="/placeholdersalon.png" alt="1">
+                    <img src="/placeholdersalon.png" alt="2">
+                    <img src="/placeholdersalon.png" alt="3">
+                </div>
+            @endif
+
+
             <div class="news-content">
                 <div class="container">
                     <div class="author-box-main mb-60">
@@ -21,7 +40,8 @@
                                 <div class="news-left mb-20 mb-lg-0">
                                     <div class="author-box d-sm-flex align-items-center">
                                         <div class="thumb radius-img-50 mb-30 mb-sm-0">
-                                            <img src="{{ asset('storage/frontend/assets/img/author/author-2.jpg') }}" alt="">
+                                            <img src="{{ asset('storage/frontend/assets/img/author/author-2.jpg') }}"
+                                                alt="">
                                         </div>
                                         <div class="content">
                                             <h4 class="author-name"><a href="#">{{ $vendor->firm_name }}<i
@@ -45,7 +65,8 @@
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6">
-                                <div class="news-right d-flex align-items-sm-center justify-content-lg-end flex-column flex-sm-row">
+                                <div
+                                    class="news-right d-flex align-items-sm-center justify-content-lg-end flex-column flex-sm-row">
                                     <div class="content-wrap d-sm-flex align-items-center">
                                         <div class="content-1 n-content-1 pr-40 mb-15 mb-sm-0">
                                             <div class="news-tag">
@@ -54,7 +75,7 @@
                                                         href="listing-details.html">Spa</a></span>
                                             </div>
                                             <div class="price">
-                                                <i class="fal fa-usd-circle  icon-default"></i> <span> ₹100 -  ₹5k</span>
+                                                <i class="fal fa-usd-circle  icon-default"></i> <span> ₹100 - ₹5k</span>
                                             </div>
                                         </div>
                                         <div class="content-2 f-left">
@@ -66,7 +87,7 @@
                                         </div>
                                     </div>
                                     <div class="news-action listing-action ml-60 mt-20 mt-sm-0">
-                                        <a href="{{ route('booking',$vendor->slug) }}" class="f-btn f-custom-btn"><i
+                                        <a href="{{ route('booking', $vendor->slug) }}" class="f-btn f-custom-btn"><i
                                                 class="fal fa-shopping-cart"></i>Book</a>
                                     </div>
                                 </div>
@@ -129,12 +150,11 @@
                                                 Visits</a>
                                         </li>
                                         <li>
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-shield"></i>Family Friendly</a>
+                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-shield"></i>Family
+                                                Friendly</a>
                                         </li>
                                         <li>
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-globe"></i>Wi-Fi</a>
+                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-globe"></i>Wi-Fi</a>
                                         </li>
                                         <li>
                                             <a href="listings-grid-right-sidebar.html"><i class="fal fa-link"></i>Guided
@@ -155,59 +175,63 @@
                                     </ul>
                                 </div>
                                 <hr class="mt-20 mb-45">
-                                @if($vendor->services)
-                                <div class="services-tabs">
-                                    <div class="service-sec">
-                                        <h5>Services</h5>
+                                @if ($vendor->services)
+                                    <div class="services-tabs">
+                                        <div class="service-sec">
+                                            <h5>Services</h5>
 
-                                        <div class="tab">
-                                            
-                                            @foreach (App\Models\Service::whereCategoryId($vendor->services)->get()  as $key=>$service)
-                                            <button class="tablinks" onclick="openCity(event, {{ 'serv'.$service->id }})" @if($key==0) id="defaultOpen" @endif>{{ $service->name }}</button>
+                                            <div class="tab">
+
+                                                @foreach (App\Models\Service::whereCategoryId($vendor->services)->get() as $key => $service)
+                                                    <button class="tablinks"
+                                                        onclick="openCity(event, {{ 'serv' . $service->id }})"
+                                                        @if ($key == 0) id="defaultOpen" @endif>{{ $service->name }}</button>
+                                                @endforeach
+                                            </div>
+                                            @foreach (App\Models\Service::whereCategoryId($vendor->services)->get() as $key => $service)
+                                                <div id="{{ 'serv' . $service->id }}" class="tabcontent ">
+                                                    @foreach (App\Models\VendorService::whereVendorId($vendor->id)->whereServiceId($service->id)->get() as $subservice)
+                                                        <div class="serv">
+                                                            <a href="{{ route('booking', $vendor->slug) }}">
+                                                                <div class="left-serv">
+                                                                    <h5>{{ $subservice->vendorservice->name }}</h5>
+                                                                    <span
+                                                                        class="serivce-time">{{ $subservice->minimum_time }}Min.
+                                                                        {{ $subservice->minimum_time }}Min.</span>
+                                                                </div>
+                                                                <div class="right-serv">
+                                                                    <h5>₹ {{ $subservice->price }}</h5>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             @endforeach
                                         </div>
-                                        @foreach (App\Models\Service::whereCategoryId($vendor->services)->get()  as $key=>$service)
-                                            
-                                            <div id="{{ 'serv'. $service->id }}" class="tabcontent ">
-                                                        @foreach (App\Models\VendorService::whereVendorId($vendor->id)->whereServiceId($service->id)->get()  as $subservice)
-                                                <div class="serv">
-                                                    <a href="{{ route('booking',$vendor->slug) }}">
-                                                        <div class="left-serv">
-                                                            <h5>{{ $subservice->vendorservice->name }}</h5>
-                                                            <span class="serivce-time">{{ $subservice->minimum_time  }}Min. {{ $subservice->minimum_time  }}Min.</span>
-                                                        </div>
-                                                        <div class="right-serv">
-                                                            <h5>₹ {{ $subservice->price }}</h5>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                    @endforeach
-                                            </div>
-                                           
-                                       @endforeach
                                     </div>
-                                </div>
                                 @endif
                                 <br />
 
 
                                 <div class="bookwStaff">
-                                    {{-- <h5>Book With Staff</h5> --}}
+                                    <h5>Meet Our Staff</h5>
                                     <div class="row staff">
                                         @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="{{ asset('storage/'.$staff->profile_pic) }}">
-                                                </div>
-                                                <h5>{{ Str::words($staff->name,1) }}</h5>
-                                                @php
-                                                    $staff_services=App\Models\Service::whereIn('id',json_decode($staff->services))->pluck('name')->toArray();
-                                                @endphp
-                                                <span>{{ implode(", ", $staff_services) }}</span>
-                                            </a>
-                                        </div>
-                                         @endforeach
+                                            <div class="col-lg-3 Staff text-center">
+                                                <a>
+                                                    <div class=" staff-img ">
+                                                        <img src="{{ asset('storage/' . $staff->profile_pic) }}">
+                                                    </div>
+                                                    <h5>{{ Str::words($staff->name, 1) }}</h5>
+                                                    @php
+                                                        $staff_services = App\Models\Service::whereIn('id', json_decode($staff->services))
+                                                            ->pluck('name')
+                                                            ->toArray();
+                                                    @endphp
+                                                    <span>{{ implode(', ', $staff_services) }}</span>
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
 
@@ -220,12 +244,15 @@
 
                                         <div class="single-review fix border-0 ">
                                             <div class="review-thumb f-review-thumb f-left mr-40 ">
-                                                <img src="{{ asset('storage/frontend/assets/img/user-3.png') }} " alt=" ">
+                                                <img src="{{ asset('storage/frontend/assets/img/user-3.png') }} "
+                                                    alt=" ">
                                             </div>
                                             <div class="review-content fix mt-11 ">
                                                 <div class="content-top ">
                                                     <h5><a href="news.html ">Rosalina D. William</a></h5>
-                                                    <p>It was popularised in the sheets containing lorem ipsum is simply free text.<br>It has survived not only five centuries, but also the leap. </p>
+                                                    <p>It was popularised in the sheets containing lorem ipsum is simply
+                                                        free text.<br>It has survived not only five centuries, but also the
+                                                        leap. </p>
                                                     <hr>
                                                 </div>
                                                 <div class="content-bottom ">
@@ -470,21 +497,26 @@
                                     <div class="single-widget widget-2 mb-30 ">
                                         <div class="widget-map ">
                                             <div class="map-frame pb-27 ">
-                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.973772994998!2d90.76841531536743!3d24.137559179791687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375427f492d15383%3A0xa3260008152240ca!2sAkand%20Bari!5e0!3m2!1sen!2sbd!4v1618422028538!5m2!1sen!2sbd "
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.973772994998!2d90.76841531536743!3d24.137559179791687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375427f492d15383%3A0xa3260008152240ca!2sAkand%20Bari!5e0!3m2!1sen!2sbd!4v1618422028538!5m2!1sen!2sbd "
                                                     class="border-0 " allowfullscreen=" " loading="lazy "></iframe>
                                             </div>
                                             <div class="map-content pl-20 pr-20 ">
                                                 <ul class="address-list ">
                                                     <li><i class="fal fa-map-marker-alt "></i>{{ $vendor->firm_address }}
                                                     </li>
-                                                    <li><i class="fal fa-envelope "></i><a href="" class="__cf_email__ " data-cfemail="07696262636f626b7747627f666a776b622964686a ">{{ $vendor->user->email }}</a>
+                                                    <li><i class="fal fa-envelope "></i><a href=""
+                                                            class="__cf_email__ "
+                                                            data-cfemail="07696262636f626b7747627f666a776b622964686a ">{{ $vendor->user->email }}</a>
                                                     </li>
                                                 </ul>
                                                 <div class="widget-social ">
                                                     <a href="# " class="facebook-btn "><i
                                                             class="fab fa-facebook-f "></i></a>
-                                                    <a href="# " class="twitter-btn "><i class="fab fa-twitter "></i></a>
-                                                    <a href="# " class="youtube-btn "><i class="fab fa-youtube "></i></a>
+                                                    <a href="# " class="twitter-btn "><i
+                                                            class="fab fa-twitter "></i></a>
+                                                    <a href="# " class="youtube-btn "><i
+                                                            class="fab fa-youtube "></i></a>
                                                     <a href="# " class="tripadvisor-btn "><i
                                                             class="fab fa-tripadvisor "></i></a>
                                                 </div>
@@ -532,16 +564,16 @@
                                                 <div class="sponsor-sm-thumb ">
                                                     <span>290x240</span>
                                                 </div> --}}
-                                            </a>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
+
+        </div>
+        </div>
         </div>
     </main>
 @endsection
@@ -549,6 +581,6 @@
 
 @endsection
 @section('script')
-<script src="{{ asset('storage/frontend/assets/js/vertical-service-tab.js') }}"></script>
+    <script src="{{ asset('storage/frontend/assets/js/vertical-service-tab.js') }}"></script>
 
 @endsection

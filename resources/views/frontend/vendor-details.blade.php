@@ -75,7 +75,7 @@
                                                         href="listing-details.html">Spa</a></span>
                                             </div>
                                             <div class="price">
-                                                <i class="fal fa-usd-circle  icon-default"></i> <span> ₹100 - ₹5k</span>
+                                                <i class="fas  fa-rupee-sign  icon-default" style="margin: 4px;"></i> <span>  ₹100 - ₹5k</span>
                                             </div>
                                         </div>
                                         <div class="content-2 f-left">
@@ -261,6 +261,9 @@
                                                         <div class="single-rating mb-5-px ">
                                                             <div class="rating rating-3 ">
                                                                 <span>Rating</span>
+                                                                {{-- @php
+                                                                    dd($vendor)
+                                                                @endphp --}}
                                                                 <i class="fas fa-star icon-default "></i>
                                                                 <i class="fas fa-star icon-default "></i>
                                                                 <i class="fas fa-star icon-default "></i>
@@ -512,14 +515,27 @@
                                                     </li>
                                                 </ul>
                                                 <div class="widget-social ">
-                                                    <a href="# " class="facebook-btn "><i
-                                                            class="fab fa-facebook-f "></i></a>
-                                                    <a href="# " class="twitter-btn "><i
-                                                            class="fab fa-twitter "></i></a>
-                                                    <a href="# " class="youtube-btn "><i
-                                                            class="fab fa-youtube "></i></a>
-                                                    <a href="# " class="tripadvisor-btn "><i
-                                                            class="fab fa-tripadvisor "></i></a>
+                                                 @if ($vendor->facebook)
+                                                 <a href="{{$vendor->facebook}}" class="facebook-btn " target="_blank"><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                                 @endif
+                                                    @if ($vendor->twitter)
+                                                    <a href="{{$vendor->twitter}}" class="twitter-btn " target="_blank"><i
+                                                        class="fab fa-twitter"></i></a>
+                                                    @endif
+                                                    @if ($vendor->youtube)
+                                                    <a href="{{$vendor->youtube}}" class="youtube-btn " target="_blank"><i
+                                                        class="fab fa-youtube"></i></a>
+                                                    @endif
+                                                    @if ($vendor->instagram)
+                                                    <a href="{{$vendor->instagram}}" class="instagram-btn" style="background: black" target="_blank">
+                                                        <i class="fab fa-instagram "></i></a>
+                                                    @endif
+                                                    
+                                                   
+                                                    
+                                                    {{-- <a href="# " class="tripadvisor-btn "><i --}}
+                                                            {{-- class="fab fa-tripadvisor "></i></a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -591,7 +607,7 @@
                     if (navigator.share) {
                         navigator.share({
                                 title: document.title,
-                                text: "Hello World",
+                                text: "Salon n Me",
                                 url: window.location.href
                             })
                             .then(() => console.log('Successful share'))

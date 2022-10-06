@@ -160,9 +160,12 @@
                                             <div class="tab">
 
                                                 @foreach (App\Models\Service::whereCategoryId($vendor->services)->get() as $key => $service)
+                                                   <a onclick="movetoBookingpage('{{ route('booking', $vendor->slug) }}')">
                                                     <button class="tablinks"
+                                                        {{-- onclick="movetoBookingpage('{{ route('booking', $vendor->slug) }}')" --}}
                                                         onclick="openCity(event, {{ 'serv' . $service->id }})"
                                                         @if ($key == 0) id="defaultOpen" @endif>{{ $service->name }}</button>
+                                                   </a>
                                                 @endforeach
                                             </div>
                                             @foreach (App\Models\Service::whereCategoryId($vendor->services)->get() as $key => $service)
@@ -577,6 +580,9 @@
 @section('script')
     <script src="{{ asset('storage/frontend/assets/js/vertical-service-tab.js') }}"></script>
     <script>
+        function movetoBookingpage(value){
+            window.location.href = value
+        }
         function copytoClipboard(value) {
 
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

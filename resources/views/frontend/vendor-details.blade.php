@@ -75,14 +75,16 @@
                                                         href="listing-details.html">Spa</a></span>
                                             </div>
                                             <div class="price">
-                                                <i class="fas  fa-rupee-sign  icon-default" style="margin: 4px;"></i> <span>  ₹100 - ₹5k</span>
+                                                <i class="fas  fa-rupee-sign  icon-default" style="margin: 4px;"></i> <span>
+                                                    ₹100 - ₹5k</span>
                                             </div>
                                         </div>
                                         <div class="content-2 f-left">
                                             <div class="news-action flex-md-column">
                                                 {{-- <a href="listing-details.html" class="f-sm-btn"><i
                                                         class="fal fa-heart"></i></a> --}}
-                                                <a class="f-sm-btn" style="color: white;" onclick="copytoClipboard(window.location.href)"><i
+                                                <a class="f-sm-btn" style="color: white;"
+                                                    onclick="copytoClipboard(window.location.href)"><i
                                                         class="fal fa-share-alt"></i></a>
                                             </div>
                                         </div>
@@ -136,46 +138,20 @@
 
 
                                 {{-- <hr class="mt-45 mb-45"> --}}
-                                <div class="service-cat-list">
-                                    <ul class="pr-35">
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-search"></i>Card
-                                                Payment</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-wifi"></i>Accessibility</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-users"></i>Group
-                                                Visits</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-shield"></i>Family
-                                                Friendly</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-globe"></i>Wi-Fi</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-link"></i>Guided
-                                                Tours</a>
-                                        </li>
-                                        <li class="no-border">
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-car"></i>Retail
-                                                and Dining</a>
-                                        </li>
-                                        <li class="no-border">
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-tv"></i>Free
-                                                Parking</a>
-                                        </li>
-                                        <li class="no-border">
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-paper-plane"></i>Science Museum</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <hr class="mt-20 mb-45">
+                                @if ($vendor->amenities != "")
+                                    <div class="service-cat-list">
+                                        <ul class="pr-35">
+                                            @foreach (json_decode($vendor->amenities) as $value)
+                                                <li>
+                                                    <a style="margin-right: 53px !important;"><i
+                                                            class="fal fa-search"></i>{{ $value }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <hr class="mt-20 mb-45">
+                                @endif
+
                                 @if ($vendor->services)
                                     <div class="services-tabs">
                                         <div class="service-sec">
@@ -515,27 +491,28 @@
                                                     </li>
                                                 </ul>
                                                 <div class="widget-social ">
-                                                 @if ($vendor->facebook)
-                                                 <a href="{{$vendor->facebook}}" class="facebook-btn " target="_blank"><i
-                                                    class="fab fa-facebook-f"></i></a>
-                                                 @endif
+                                                    @if ($vendor->facebook)
+                                                        <a href="{{ $vendor->facebook }}" class="facebook-btn "
+                                                            target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                    @endif
                                                     @if ($vendor->twitter)
-                                                    <a href="{{$vendor->twitter}}" class="twitter-btn " target="_blank"><i
-                                                        class="fab fa-twitter"></i></a>
+                                                        <a href="{{ $vendor->twitter }}" class="twitter-btn "
+                                                            target="_blank"><i class="fab fa-twitter"></i></a>
                                                     @endif
                                                     @if ($vendor->youtube)
-                                                    <a href="{{$vendor->youtube}}" class="youtube-btn " target="_blank"><i
-                                                        class="fab fa-youtube"></i></a>
+                                                        <a href="{{ $vendor->youtube }}" class="youtube-btn "
+                                                            target="_blank"><i class="fab fa-youtube"></i></a>
                                                     @endif
                                                     @if ($vendor->instagram)
-                                                    <a href="{{$vendor->instagram}}" class="instagram-btn" style="background: black" target="_blank">
-                                                        <i class="fab fa-instagram "></i></a>
+                                                        <a href="{{ $vendor->instagram }}" class="instagram-btn"
+                                                            style="background: black" target="_blank">
+                                                            <i class="fab fa-instagram "></i></a>
                                                     @endif
-                                                    
-                                                   
-                                                    
+
+
+
                                                     {{-- <a href="# " class="tripadvisor-btn "><i --}}
-                                                            {{-- class="fab fa-tripadvisor "></i></a> --}}
+                                                    {{-- class="fab fa-tripadvisor "></i></a> --}}
                                                 </div>
                                             </div>
                                         </div>

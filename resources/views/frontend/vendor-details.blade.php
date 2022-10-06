@@ -82,7 +82,8 @@
                                             <div class="news-action flex-md-column">
                                                 {{-- <a href="listing-details.html" class="f-sm-btn"><i
                                                         class="fal fa-heart"></i></a> --}}
-                                                <a href="#" class="f-sm-btn"><i class="fal fa-share-alt"></i></a>
+                                                <a class="f-sm-btn" style="color: white;" onclick="copytoClipboard(window.location.href)"><i
+                                                        class="fal fa-share-alt"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -582,5 +583,32 @@
 @endsection
 @section('script')
     <script src="{{ asset('storage/frontend/assets/js/vertical-service-tab.js') }}"></script>
+    <script>
+        function copytoClipboard(value) {
 
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                try {
+                    if (navigator.share) {
+                        navigator.share({
+                                title: document.title,
+                                text: "Hello World",
+                                url: window.location.href
+                            })
+                            .then(() => console.log('Successful share'))
+                            .catch(error => console.log('Error sharing:', error));
+                    }
+                } catch (error) {
+
+                }
+            } else {
+                // Copy the text inside the text field
+                navigator.clipboard.writeText(value);
+                // Alert the copied text
+                alert("Copied the text: " + value);
+            }
+
+
+
+        }
+    </script>
 @endsection

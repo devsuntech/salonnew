@@ -100,15 +100,30 @@
                     <div class="news-description">
                         <div class="row">
                             <div class="col-xl-8 col-lg-7">
-                                {{-- <div class="desc-box  mb-16">
-                                    <p>
+                                <div class="desc-box  mb-16">
+                                    {{-- <p>
                                         <span class="first-letter">{!! $vendor->about_firm[0] !!}</span>
                                         {!! $vendor->about_firm !!}
-                                    </p>
-                                </div> --}}
+                                    </p> --}}
+                                </div>
 
                                 {{-- <hr class="mt-47 mb-45"> --}}
                                 <div class="info">
+                                    @if ($vendor->amenities != "")
+                                    <div class="service-cat-list">
+                                        <h5>Amenities</h5>
+                                        <br/>
+                                        <ul class="pr-35">
+                                            @foreach (json_decode($vendor->amenities) as $value)
+                                                <li>
+                                                    <a style="margin-right: 53px !important;"><i
+                                                            class="fal fa-check-circle"></i>{{ $value }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <hr class="mt-20 mb-45">
+                                @endif
                                     {{-- <div class="service-wrapper">
                                         <div class="single-service">
                                             <div class="service-icon f-left"><i class="fal fa-home-lg-alt"></i></div>
@@ -138,19 +153,7 @@
 
 
                                 {{-- <hr class="mt-45 mb-45"> --}}
-                                @if ($vendor->amenities != "")
-                                    <div class="service-cat-list">
-                                        <ul class="pr-35">
-                                            @foreach (json_decode($vendor->amenities) as $value)
-                                                <li>
-                                                    <a style="margin-right: 53px !important;"><i
-                                                            class="fal fa-search"></i>{{ $value }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <hr class="mt-20 mb-45">
-                                @endif
+                              
 
                                 @if ($vendor->services)
                                     <div class="services-tabs">

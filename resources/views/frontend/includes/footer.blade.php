@@ -36,12 +36,12 @@
                                     </h3>
                                     <ul>
                                         <li><a href="{{ route('home') }}">Home</a></li>
-                                        <li><a href="{{ route('about.us') }}">About</a></li>
+                                        {{-- <li><a href="{{ route('about.us') }}">About</a></li> --}}
                                         <li><a href="{{ route('our.services') }}">Services</a></li>
-                                        <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
-                                        <li><a href="">Features</a></li>
+                                        {{-- <li><a href="{{ route('portfolio') }}">Portfolio</a></li> --}}
+                                        {{-- <li><a href="">Features</a></li> --}}
                                         <li><a href="{{ route('contact.us') }}">Contact</a></li>
-                                        <li><a href="{{ route('news.feeds') }}">News</a></li>
+                                        {{-- <li><a href="{{ route('news.feeds') }}">News</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                     <ul>
                                         <li><a href="{{ route('terms.conditions') }}">Terms & Conditions</a></li>
                                         <li><a href="{{ route('privacy.policy') }}">Privacy Policy</a></li>
-                                        <li><a href="{{ route('news.feeds') }}">News Feeds</a></li>
+                                        {{-- <li><a href="{{ route('news.feeds') }}">News Feeds</a></li> --}}
                                         <li><a href="{{ route('faq.updates') }}">Faq & Updates</a></li>
                                         <li><a href="{{ route('refund.policy') }}">Refund Policy</a></li>
                                     </ul>
@@ -69,7 +69,7 @@
                 <div class="col-xl-3 col-md-12">
                     <div class="footer-widget f-w-space widget-spacing contact-widget pb-200 pb-xl-0">
                         <h3 class="widget-title border-0  widget-title-1 mb-0" style="color:white;">
-                            Subscribe <span style="color: black;">Now</span>
+                            Contact <span style="color: black;">Us</span>
                         </h3>
                         <form action="#">
                             <div class="input-wrap">

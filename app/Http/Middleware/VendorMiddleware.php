@@ -17,6 +17,14 @@ class VendorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        
+       
+        if (!Auth::check()) {
+            // dd(Auth::check());
+            Auth::logout();
+            // dd("here");
+            return redirect()->route('login');
+        }
         if(Auth::user()->user_type=="vendor")
         {
 

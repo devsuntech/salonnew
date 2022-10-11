@@ -74,13 +74,13 @@
                         <form method="POST" action="{{ route('submit.contact') }}">
                             @csrf
                             <div class="input-wrap">
-                                <input type="text" name="name" placeholder="Enter full name">
+                                <input type="text" name="name" placeholder="Enter full name" required>
                             </div>
                             <div class="input-wrap">
-                                <input type="text" name="email" placeholder="Enter email address">
+                                <input type="text" name="email" placeholder="Enter email address" required>
                             </div>
                             <div class="input-wrap">
-                                <textarea name="comment" placeholder="Enter message"></textarea>
+                                <textarea name="comment" placeholder="Enter message" required></textarea>
                             </div>
                             <div class="input-wrap">
                                 <input type="submit" class="submit-btn" value="Submit Now">

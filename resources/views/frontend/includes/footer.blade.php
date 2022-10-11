@@ -71,15 +71,16 @@
                         <h3 class="widget-title border-0  widget-title-1 mb-0" style="color:white;">
                             Contact <span style="color: black;">Us</span>
                         </h3>
-                        <form action="#">
+                        <form method="POST" action="{{ route('submit.contact') }}">
+                            @csrf
                             <div class="input-wrap">
-                                <input type="text" placeholder="Enter full name">
+                                <input type="text" name="name" placeholder="Enter full name">
                             </div>
                             <div class="input-wrap">
-                                <input type="text" placeholder="Enter email address">
+                                <input type="text" name="email" placeholder="Enter email address">
                             </div>
                             <div class="input-wrap">
-                                <textarea name="msg" placeholder="Enter message"></textarea>
+                                <textarea name="comment" placeholder="Enter message"></textarea>
                             </div>
                             <div class="input-wrap">
                                 <input type="submit" class="submit-btn" value="Submit Now">

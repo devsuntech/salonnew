@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('packages')) {
-            Schema::create('packages', function (Blueprint $table) {
-                $table->id();
-                $table->timestamps();
-            });
-        }
-       
+        Schema::create('contact_us', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->text('comment')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('contact_us');
     }
 };

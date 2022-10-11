@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
+use App\Models\Contactus;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -35,9 +35,8 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $contact=new Contact;
-        $contact->name=$request->name;
-        $contact->save();
+       
+        $query = Contactus::create(['name'=>$request->name,'email'=>$request->email,'comment'=>$request->comment]);
         return back()->with('success','Your Query Submitted Successfully.');
     }
 

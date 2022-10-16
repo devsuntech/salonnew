@@ -34,15 +34,19 @@
                   </thead>
                   <tbody>
                   @foreach ($datas as $key=>$data )
+                  {{-- {{dd($data)}} --}}
                   <tr>
                     <td>{{ $key+1 }}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{$data->id ?? ''}}</td>
+                    <td>{{optional($data->customerDetail)->name ?? ''}}</td>
+                    <td>{{optional($data->customerDetail)->mobile ?? ''}}</td>
+                    <td>{{$data->payment_status ?? ''}}</td>
+                    <td>
+                      {{$data->booking_date ?? ''}}
+                      {{$data->booking_time ?? ''}}
+                    </td>
+                    <td>{{$data->booking_date ?? ''}}</td>
+                    <td>{{$data->id ?? ''}}</td>
                   </tr>
                   @endforeach
                   </tbody>

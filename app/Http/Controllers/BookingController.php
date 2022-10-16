@@ -27,6 +27,7 @@ class BookingController extends Controller
     public function vendorBookings(Request $request)
     {
         $datas=Booking::latest()->paginate(10);
+        // dd($datas);
         return view('vendor.order.index',compact('datas'));
     }
     /**

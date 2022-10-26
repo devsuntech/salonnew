@@ -101,8 +101,8 @@ class BookingController extends Controller
         $validated = $request->validate([
             'vendor_id' => 'required|integer',
             'vendor_staff_id' => 'required|integer',
-            'date' => 'required|date_format:m/d/Y',
-            'time' => 'required|date_format:H:i',
+            'date' => 'required',
+            'time' => 'required',
             'services' => 'required|array'
         ]);
         $total_amount = $this->calculateTotalAmount($validated['services']);
@@ -111,7 +111,7 @@ class BookingController extends Controller
             'customer_id' => Auth::user()->id,
             'payment_type' => 'Online',
             'payment_status' => 'Pending',
-            'booking_date' => Carbon::createFromFormat('m/d/Y', $validated['date']),
+            'booking_date' =>$validated['date'],
             'booking_time' => $validated['time'],
             'booking_status' => 'Pending',
             'online_payment_method' => 'razorpay',

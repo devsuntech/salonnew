@@ -113,283 +113,13 @@
             <div class="col-xl-7 col-lg-7 toppostitoncustom" >
                 <form class="" id="booking-form">
                     <input type="hidden" value="<?= $vendor->id; ?>"  name="vendor_id" />
+
                     <div class="col-xl-12 col-lg-12 form-step form-step-active">
-                        <div class="service-progress ">
-                            <div>
-                                <p>Step 1 of 5</p>
-                                <h2>
-                                    Select Sevices
-                                </h2>
-                            </div>
-                            <div>
-                                <button type="button" class="ml-auto btn-next btn arrow-btn" onclick="javascript:tabValidate(1)"  wire:click="firstStepSubmit">
-                                    <i class="fas fa-caret-right arrow"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <div class="scroll-tabs scroll-tabs-bg book__wrapper white-bg" scroll="true">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    @foreach (App\Models\Service::havingCategories((array) $vendor->services)->get()  as $key=>$service)
-                                    @php if(App\Models\VendorService::whereServiceId($service->id)->whereVendorId($vendor->id)->get()->isEmpty()) continue; @endphp
-                                    <li @if($key==0) class="active" @endif><a href="#service{{ $service->id }}" data-toggle="tab">{{ $service->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="scroll-card-body book__wrapper white-bg">
-                                <div class="tab-content">
-                                    @php $counter = 0; @endphp
-                                    @foreach (App\Models\Service::havingCategories((array) $vendor->services)->get()  as $key=>$service)
-                                    @php if(App\Models\VendorService::whereServiceId($service->id)->whereVendorId($vendor->id)->get()->isEmpty()) continue; $counter++; @endphp
-                                    <div role="tabpane{{ $service->id }}" class="tab-pane @if($counter==1) active @endif" id="service{{ $service->id }}">
-                                        @foreach(App\Models\VendorService::whereServiceId($service->id)->whereVendorId($vendor->id)->orderBy('position')->get() as $key => $vendorservice)
-                                        <div class="service-list">
-                                            <label for="{{$vendorservice->vendorservice->name}}">
-                                                
-                                            
-                                            <div class="list-sec row">
-                                                <div class="col-lg-9 service-name">
-                                                    <div class="checkbox">
-                                                        <input type="checkbox" name="services[]" id="{{$vendorservice->vendorservice->name}}" data-name="{{ $vendorservice->vendorservice->name }}" data-minimum_time="{{ $vendorservice->minimum_time  }}" data-price="{{ $vendorservice->price }}" value="{{ $vendorservice->id }}"/>
-                                                    </div>
-                                                    <div>
-                                                        <h4> {{ $vendorservice->vendorservice->name }} </h4>
-                                                        <span>{{ $vendorservice->minimum_time  }}Min.</span>
-                                                    </div>
-                                                    
-                                                </div>
-                                                <div class="col-lg-3 service-amt">
-                                                    <h4>₹ {{ $vendorservice->price }}</h4>
-                                                </div>
-                                            </div>
-                                            </label>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-12 col-lg-12 form-step">
-                        <div class="service-progress ">
-                            <div>
-                                <button type="button" class="btn-prev btn arrow-btn firsttabprev" wire:click="back(1)">
-                                    <i class="fas fa-caret-left arrow"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <p>Step 2 of 5</p>
-                                <h2>
-                                    Select Staff
-                                </h2>
-                            </div>
-                            <div>
-                                <button type="button" class="btn-next btn arrow-btn" onclick="javascript:tabValidate(2)" wire:click="secondStepSubmit">
-                                    <i class="fas fa-caret-right arrow"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="book__wrapper white-bg">
-                            <div class="service-list">
-                                <label for="radioone">
-                                <div class="list-sec row">
-                                    <div class="col-lg-9 service-name">
-                                        <div class="staff-img2">
-                                            <div class="img-avtar">
-                                                <i class="far fa-users"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h4>No Preference</h4>
-                                            <span>Maximum availability</span>
-                                        </div>
-                                    </div>
-                                    <div class="checkbox col-lg-3 text-right">
-                                        <input type="radio" value="0"  name="vendor_staff_id" id="radioone" />
-                                    </div>
-                                </div>
-                              </label>
-                            </div>
-                            @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
-                            <div class="service-list">
-                             <label for="radiotwo">
-                                <div class="list-sec row">
-                                    <div class="col-lg-9 service-name">
-                                        <div class="staff-img2">
-                                            <div class="img-avtar">
-                                                <img src="{{ asset('storage/'.$staff->profile_pic) }}" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h4>{{ Str::words($staff->name) }}</h4>
-                                            @php
-                                            $staff_services=App\Models\Service::whereIn('id',json_decode($staff->services))->pluck('name')->toArray();
-                                            @endphp
-                                            <span>{{ implode(", ", $staff_services) }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="checkbox col-lg-3 text-right">
-                                        <input type="radio" value="{{$staff->id}}" name="vendor_staff_id" id="radiotwo"/>
-                                    </div>
-                                </div>
-                             </label>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="col-xl-12 col-lg-12 form-step">
 
                         <div class="service-progress ">
+                           
                             <div>
-                                <button type="button" class="btn-prev btn arrow-btn secondtabprev" wire:click="back(2)">
-                                    <i class="fas fa-caret-left arrow"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <p>Step 3 of 5</p>
-                                <h2>
-                                    Select Time
-                                </h2>
-                            </div>
-                            <div>
-                                <button type="button" class="ml-auto btn-next btn arrow-btn" wire:click="thiredStepSubmit">
-                                    <i class="fas fa-caret-right arrow"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="book__wrapper white-bg">
-                            <div class="row">
-                                <div class="col-md-12 pl-3">
-                                    @php use \Carbon\Carbon; @endphp
-                                    <h5 class="book__select_time__month_name">{{ Carbon::now()->monthName }}</h5>
-                                </div>
-                            </div>
-                            <div class="row pl-3">
-                                <div class="col-md-12">
-                                    <div class="row book__select_time__date_box__container">
-                                        <input type="hidden" name="date" value="{{Carbon::today()->format('m/d/Y') }}">
-                                        <div class="book__select_time_date_box prev_button"><i class="fas fa-arrow-left"></i></div>
-                                        @for($itemNumber=0; $itemNumber < 5; $itemNumber++)
-                                        <div class="book__select_time_date_box col-md-2{{ $itemNumber == 0 ? ' active' : '' }}" data-day="{{Carbon::today()->addDays($itemNumber)->format('m/d/Y') }}"><div>{{ Carbon::today()->addDays($itemNumber)->shortEnglishDayOfWeek }}</div><div>{{ Carbon::today()->addDays($itemNumber)->day }}</div></div>
-                                        @endfor
-                                        <div class="book__select_time_date_box next_button enabled"><i class="fas fa-arrow-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="book__wrapper white-bg">
-                            @php 
-                            
-                                $slot_time = $opening_time = '11:00am'; $closing_time = '7:30pm'; 
-                            
-                            @endphp
-                            @while(true)
-                            <div class="service-list">
-                              <label for="{{ Carbon::parse($slot_time)->format('H:i') }}">
-                                <div class="list-sec row">
-                                    <div class="col-lg-9 service-name">
-                                        <div>
-                                        {{ $slot_time }}
-                                        </div>
-                                    </div>
-                                    <div class="checkbox col-lg-3 text-right">
-                                        <input type="radio" value="{{ Carbon::parse($slot_time)->format('H:i') }}" name="time" id="{{ Carbon::parse($slot_time)->format('H:i') }}"/>
-                                    </div>
-                                </div>
-                                </label>
-                            </div>
-                            @php
-                                if($closing_time == $slot_time) {
-                                    break;
-                                }
-
-                                $slot_time = Carbon::parse($slot_time . ' + 30 minutes')->format('g:ia');
-                            @endphp
-                            @endwhile
-                        </div>
-                    </div>
-                    
-                    <div class="col-xl-12 col-lg-12 form-step">
-                        <div class="service-progress ">
-                            <div>
-                                <button type="button" class="btn-prev btn arrow-btn" wire:click="back(3)">
-                                    <i class="fas fa-caret-left arrow"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <p>Step 4 of 5</p>
-                                <h2>
-                                    Select Location
-                                </h2>
-                            </div>
-                            <div>
-                                <button type="button" class="btn-next btn arrow-btn" onclick="javascript:tabValidate(4)" wire:click="FourthStepSubmit">
-                                    <i class="fas fa-caret-right arrow"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="book__wrapper white-bg">
-                            <div class="service-list">
-                              <label for="serviceone">
-                                <div class="list-sec row">
-                                    <div class="col-lg-9 service-name">
-                                        <div class="staff-img2">
-                                            <div class="img-avtar">
-                                                <i class="far fa-users"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h4>On Showroom</h4>
-                                            <span>Service on showroom</span>
-                                        </div>
-                                    </div>
-                                    <div class="checkbox col-lg-3 text-right">
-                                        <input type="radio" value="showoroom"  name="service_location_done" id="serviceone"/>
-                                    </div>
-                                </div>
-                             </label>
-                            </div>
-                            @if (in_array("Home Appointment",json_decode($vendor->amenities)))
-                                <div class="service-list">
-                                    <label for="servicedoor">
-                                        <div class="list-sec row">
-                                            <div class="col-lg-9 service-name">
-                                                <div class="staff-img2">
-                                                    <div class="img-avtar">
-                                                        <i class="far fa-users"></i>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h4>Booking for Home</h4>
-                                                    <span>Service @Doorstep</span>
-                                                </div>
-                                            </div>
-                                            <div class="checkbox col-lg-3 text-right">
-                                                <input type="radio" value="home" name="service_location_done"
-                                                    id="servicedoor" />
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            @endif
-                          
-                        </div>
-                    </div>
-
-                    <div class="col-xl-12 col-lg-12 form-step">
-
-                        <div class="service-progress ">
-                            <div>
-                                <button type="button" class="btn-prev btn arrow-btn fourthtabprev" wire:click="back(4)">
-                                    <i class="fas fa-caret-left arrow"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <p>Step 5 of 5</p>
+                                <p></p>
                                 <h2>
                                     Review and Confirm
                                 </h2>
@@ -524,6 +254,7 @@
                         <div class="booking__cart__selected_services">
                         </div>
                         <div class="total">
+                            
                             <div class="list-sec row">
                                 <div class="col-lg-9 total-amt text-left">
                                     <div>
@@ -532,7 +263,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 text-right">
-                                    <h4>₹<span class="booking__cart__total">0</span></h4>
+                                    <h4>₹<span class="booking__cart__total"></span></h4>
                                 </div>
                             </div>
                         </div>
@@ -572,64 +303,43 @@
     <script src="{{ asset('storage/frontend/assets/js/date.js') }}"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
-        let serializeJSONArray = (array) => {
-            var formData = {};
-            $(array).each(function() {
-                formData[this.name] = this.value;  
-            })
-            return formData;
-        };
+
 
         $(document).ready(function () {
-            $('body').on('click', '.book__select_time_date_box', function() {
-                if (!$(this).hasClass('next_button') && !$(this).hasClass('prev_button')) {
-                    $('.book__select_time_date_box').removeClass('active');
-                    $(this).addClass('active');
-                    $('input[name="date"]').val($(this).data('day'));
-                }
+            
+            var allData= JSON.parse(localStorage.getItem('data'))
+            
+            var htmldata = ""
+            var total = 0
+            allData.items.forEach(element => {
+                // console.log(element.price)
+                // htmldata
+                let tempElement = JSON.parse(element)
+                total += parseInt(tempElement.price)  
+                htmldata += '<div class="list-sec row"><div class="col-lg-9 service-name"><div><h4>'+tempElement.subservicename+'</h4><span>'+tempElement.subserviceminute+'Min</span></div></div><div class="col-lg-3 service-amt"><h4>₹'+tempElement.price+'</h4></div></div>'
             });
-            $('input[name="services[]"]').click(function () {
-                let selected_services_list = '';
-                let cart_total = 0;
-                $('input[name="services[]"]:checked').each(function (index, item) {
-                    selected_services_list += `<div class="service-list">
-                                                <div class="list-sec row">
-                                                    <div class="col-lg-9 service-name">
-                                                        <div>
-                                                            <h4>${$(this).data('name')}</h4>
-                                                            <span>${$(this).data('minimum_time')}Min</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 service-amt">
-                                                        <h4>₹${$(this).data('price')}</h4>
-                                                    </div>
-                                                </div>
-                                            </div>`;
-                    cart_total += parseFloat($(this).data('price'));
-                });
-
-                $('.booking__cart__selected_services').html(selected_services_list);
-                $('.booking__cart__total').text(cart_total);
-            });
-
+            console.log(total)
+            $('.booking__cart__selected_services').append(htmldata)
+            $('.booking__cart__total').append('')
+            $('.booking__cart__total').append(total)
             /* 
                 Booking processing start
             */
 
             $('[name="payment_type"]').click(function () {
-                let bookingData = serializeJSONArray($('#booking-form').serializeArray());
+                let bookingData = allData;
                 bookingData._token = '<?= csrf_token(); ?>';
-                console.log(bookingData);
-                if (bookingData.payment_type == 'pay-at-vendor') {
+                let checkPaymentDetails= $('#pay-at-vendor').val()
+                if (checkPaymentDetails == 'pay-at-vendor') {
                     let confirmBooking = confirm("Do you want to confirm the booking?")
                     if (confirmBooking) {
                         createPayAtVendorBooking(bookingData);
                     }
                     return;
-                } else if(bookingData.payment_type == 'razorpay') {
+                } else if(checkPaymentDetails == 'razorpay') {
                     createRazorpayBooking(bookingData);
                 }
-
+                console.log("here")
             });
 
             let createPayAtVendorBooking = (bookingData) => {

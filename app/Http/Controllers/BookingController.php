@@ -56,7 +56,12 @@ class BookingController extends Controller
         ];
         $booking->fill($booking_data)->save();
         $booking->bookingDetail()->saveMany($this->prepareBookingDetailArray($validated));
-        Mail::to(Auth::user()->email)->send(new EmailBookingUser());
+        try {
+            Mail::to(Auth::user()->email)->send(new EmailBookingUser());
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        
         return response()->json($booking);
     }
 

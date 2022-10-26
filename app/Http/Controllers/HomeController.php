@@ -120,13 +120,15 @@ class HomeController extends Controller
             $vendorDetails = VendorService::where('vendor_id',$vendor->id)->get()->groupBy('service_id');
             $period = new CarbonPeriod('11:00', '30 minutes', '19:30'); // for create use 24 hours format later change format 
             $slots = [];
+            $slotsValue = [];
             foreach($period as $item){
                 array_push($slots,$item->format("h:i A"));
+                array_push($slotsValue,$item->format("h:i"));
             }
             $staff = VendorStaff::where('vendor_id',$vendor->id)->get();
             // dd($slots);
             // dd($vendorDetails);
-            return view('frontend.vendor-details',compact('vendorDetails','vendor','slots','staff'));
+            return view('frontend.vendor-details',compact('vendorDetails','vendor','slots','staff','slotsValue'));
         } else{
             abort(404);
         }

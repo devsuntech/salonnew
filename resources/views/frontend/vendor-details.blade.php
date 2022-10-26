@@ -209,8 +209,8 @@
                                             <div class="servicedetails">
                                                 <select class="form-control" id="slotselection">
                                                     <option>Select Slot</option>
-                                                    @foreach ($slots as $slot)
-                                                        <option>{{ $slot }}</option>
+                                                    @foreach ($slots as $key => $slot)
+                                                        <option value="{{$slotsValue[$key]}}">{{ $slot }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

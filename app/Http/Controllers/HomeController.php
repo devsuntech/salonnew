@@ -12,9 +12,13 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VendorCoupon;
+use App\Models\VendorService;
 use DB;
 use App\Models\Coupon;
+use App\Models\VendorStaff;
 use Session;
+use Carbon\CarbonPeriod;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     /**
@@ -112,7 +116,17 @@ class HomeController extends Controller
     public function vendorDetail($slug)
     {
         if ($vendor=Vendor::whereSlug($slug)->first()) {
-            return view('frontend.vendor-details',compact('vendor'));
+            // dd($vendor);;
+            $vendorDetails = VendorService::where('vendor_id',$vendor->id)->get()->groupBy('service_id');
+            $period = new CarbonPeriod('11:00', '30 minutes', '19:30'); // for create use 24 hours format later change format 
+            $slots = [];
+            foreach($period as $item){
+                array_push($slots,$item->format("h:i A"));
+            }
+            $staff = VendorStaff::where('vendor_id',$vendor->id)->get();
+            // dd($slots);
+            // dd($vendorDetails);
+            return view('frontend.vendor-details',compact('vendorDetails','vendor','slots','staff'));
         } else{
             abort(404);
         }

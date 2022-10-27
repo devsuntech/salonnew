@@ -11,26 +11,22 @@
     <div class="clearfix"></div>
     <main class="pt-100">
         <div class="listing-details-area pb-100">
-            <div class="news-slider">
-                <div class="news-thumb">
-                    <img src="assets/img/sal1.jpg" alt="">
+            @if (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->count())
+                <div class="news-slider">
+                    @foreach (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->get() as $key => $gallery)
+                        <div class="news-thumb">
+                            <img src="{{ asset('storage/' . $gallery->image) }}"
+                                alt="{{ $vendor->firm_name . $gallery->id }}">
+                        </div>
+                    @endforeach
                 </div>
-                <div class="news-thumb">
-                    <img src="assets/img/sal10.jpg" alt="">
+            @else
+                <div class="news-slider">
+                    <img src="/public/placeholdersalon.png" alt="1">
+                    <img src="/public/placeholdersalon.png" alt="2">
+                    <img src="/public/placeholdersalon.png" alt="3">
                 </div>
-                <div class="news-thumb">
-                    <img src="assets/img/sal11.jpg" alt="">
-                </div>
-                <div class="news-thumb">
-                    <img src="assets/img/sal14.jpg" alt="">
-                </div>
-                <div class="news-thumb">
-                    <img src="assets/img/sal15.jpg" alt="">
-                </div>
-                <div class="news-thumb">
-                    <img src="assets/img/sal13.jpg" alt="">
-                </div>
-            </div>
+            @endif
             <div class="news-content">
                 <div class="container">
                     <div class="author-box-main mb-60">
@@ -42,7 +38,7 @@
                                             <img src="assets/img/author/author-2.jpg" alt="">
                                         </div>
                                         <div class="content">
-                                            <h4 class="author-name"><a href="news.html">Silver Rose Salon<i
+                                            <h4 class="author-name"><a href="news.html">{{ $vendor->firm_name ?? '' }}<i
                                                         class="fal fa-check-circle"></i></a> </h4>
                                             <div class="author-meta d-md-flex">
                                                 <div class="rating-2 mr-13  mb-10 mb-sm-0">
@@ -54,8 +50,8 @@
                                                     <i class="fal fa-star icon-default"></i>
                                                 </div>
                                                 <div class="duration d-inline-block">
-                                                    <i class="fal fa-clock icon-default"></i><span> Posted 8 hours
-                                                        ago</span>
+                                                    {{-- <i class="fal fa-clock icon-default"></i><span> Posted 8 hours
+                                                        ago</span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -73,21 +69,22 @@
                                                         href="listing-details.html">Spa</a></span>
                                             </div>
                                             <div class="price">
-                                                <i class="fal fa-usd-circle  icon-default"></i> <span>$100 - $5k</span>
+                                                <i class="fas  fa-rupee-sign  icon-default" style="margin: 4px;"></i> <span>
+                                                    ₹100 - ₹5k</span>
                                             </div>
                                         </div>
                                         <div class="content-2 f-left">
                                             <div class="news-action flex-md-column">
-                                                <a href="listing-details.html" class="f-sm-btn"><i
-                                                        class="fal fa-heart"></i></a>
-                                                <a href="#" class="f-sm-btn"><i class="fal fa-share-alt"></i></a>
+                                                {{-- <a href="listing-details.html" class="f-sm-btn"><i
+                                                        class="fal fa-heart"></i></a> --}}
+                                                <a  class="f-sm-btn" onclick="copytoClipboard(window.location.href)" style="color: white;"><i class="fal fa-share-alt"></i></a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="news-action listing-action ml-60 mt-20 mt-sm-0">
+                                    {{-- <div class="news-action listing-action ml-60 mt-20 mt-sm-0">
                                         <a href="listings-grid-right-sidebar.html" class="f-btn f-custom-btn"><i
                                                 class="fal fa-bars"></i> Show All Photos</a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -146,47 +143,23 @@
 
 
                                 <hr class="mt-45 mb-45">
-                                <div class="service-cat-list">
-                                    <ul class="pr-35">
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-search"></i>Card
-                                                Payment</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-wifi"></i>Accessibility</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-users"></i>Group
-                                                Visits</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-shield"></i>Family
-                                                Friendly</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-globe"></i>Wi-Fi</a>
-                                        </li>
-                                        <li>
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-link"></i>Guided
-                                                Tours</a>
-                                        </li>
-                                        <li class="no-border">
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-car"></i>Retail
-                                                and Dining</a>
-                                        </li>
-                                        <li class="no-border">
-                                            <a href="listings-grid-right-sidebar.html"><i class="fal fa-tv"></i>Free
-                                                Parking</a>
-                                        </li>
-                                        <li class="no-border">
-                                            <a href="listings-grid-right-sidebar.html"><i
-                                                    class="fal fa-paper-plane"></i>Science Museum</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <hr class="mt-20 mb-45">
+                                @if ($vendor->amenities != '')
+                                    <div class="service-cat-list">
+                                        <h5>Amenities</h5>
+                                        <br />
+                                        <ul class="pr-35">
+                                            @foreach (json_decode($vendor->amenities) as $value)
+                                                <li>
+                                                    <a style="margin-right: 53px !important;"><i
+                                                            class="fal fa-check-circle"></i>{{ $value }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <hr class="mt-20 mb-45">
+                                @endif
+
+                                {{-- <hr class="mt-20 mb-45"> --}}
                                 <div class="services-tabs" style="margin: 20px">
                                     <div class="service-sec">
                                         <h5>
@@ -210,7 +183,8 @@
                                                 <select class="form-control" id="slotselection">
                                                     <option>Select Slot</option>
                                                     @foreach ($slots as $key => $slot)
-                                                        <option value="{{$slotsValue[$key]}}">{{ $slot }}</option>
+                                                        <option value="{{ $slotsValue[$key] }}">{{ $slot }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -237,11 +211,13 @@
                                                                     // dd($value->vendorsubservicedetails);
                                                                 @endphp
                                                                 <h5> {{ $value->vendorsubservicedetails->name }} </h5>
-                                                                <span class="serivce-time">{{$value->minimum_time}} - {{$value->maximum_time}}</span>
+                                                                <span class="serivce-time">{{ $value->minimum_time }} -
+                                                                    {{ $value->maximum_time }}</span>
                                                             </div>
                                                             <div class="right-serv" style="display: flex">
-                                                                <h5>₹{{$value->price}}</h5>
-                                                                <input type="checkbox" name="selectedsubservice"  value='{"price":"{{$value->price}}","subserviceid":"{{$value->subservice_id}}","subservicename":"{{ $value->vendorsubservicedetails->name}}","subserviceminute":"{{$value->minimum_time}}"}'/>
+                                                                <h5>₹{{ $value->price }}</h5>
+                                                                <input type="checkbox" name="selectedsubservice"
+                                                                    value='{"price":"{{ $value->price }}","subserviceid":"{{ $value->subservice_id }}","subservicename":"{{ $value->vendorsubservicedetails->name }}","subserviceminute":"{{ $value->minimum_time }}"}' />
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -250,66 +226,29 @@
                                             {{-- <button class="btn btn-primary btn-sm" style="float: right;">Submit</button> --}}
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-sm" style="float: right" onclick="selectedform('{{$vendor->id}}')">Submit</button>
+                                    <button class="btn btn-primary btn-sm" style="float: right"
+                                        onclick="selectedform('{{ $vendor->id }}')">Submit</button>
                                     <br>
                                 </div>
                                 <div class="bookwStaff">
                                     <h5>Our Staff</h5>
                                     <div class="row staff">
+                                        @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
                                         <div class="col-lg-3 Staff text-center">
                                             <a>
                                                 <div class=" staff-img ">
-                                                    <img src="assets/img/staff.jpeg">
+                                                    <img src="{{ asset('storage/' . $staff->profile_pic) }}">
                                                 </div>
-                                                <h5>Shreya</h5>
-                                                <span>Massage Therapist FHT regd</span>
+                                                <h5>{{ Str::words($staff->name, 1) }}</h5>
+                                                @php
+                                                    $staff_services = App\Models\Service::whereIn('id', json_decode($staff->services))
+                                                        ->pluck('name')
+                                                        ->toArray();
+                                                @endphp
+                                                <span>{{ implode(', ', $staff_services) }}</span>
                                             </a>
                                         </div>
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="assets/img/staff.jpeg">
-                                                </div>
-                                                <h5>Shreya</h5>
-                                                <span>Massage Therapist FHT regd</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="assets/img/staff.jpeg">
-                                                </div>
-                                                <h5>Shreya</h5>
-                                                <span>Massage Therapist FHT regd</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="assets/img/staff1.jpg ">
-                                                </div>
-                                                <h5>Shreya</h5>
-                                                <span>Massage Therapist FHT regd</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="assets/img/staff1.jpg ">
-                                                </div>
-                                                <h5>Shreya</h5>
-                                                <span>Massage Therapist FHT regd</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="assets/img/staff1.jpg ">
-                                                </div>
-                                                <h5>Shreya</h5>
-                                                <span>Massage Therapist FHT regd</span>
-                                            </a>
-                                        </div>
+                                    @endforeach
                                     </div>
                                 </div>
 
@@ -610,24 +549,34 @@
                                             </div>
                                             <div class="map-content pl-20 pr-20 ">
                                                 <ul class="address-list ">
-                                                    <li><i class="fal fa-map-marker-alt "></i>80 Broklyn Golden Street USA
+                                                    <li><i class="fal fa-map-marker-alt "></i>{{ $vendor->firm_address ?? '' }}
                                                     </li>
-                                                    <li><i class="fal fa-phone "></i>92 666 888 0000</li>
-                                                    <li><i class="fal fa-envelope "></i><a
+                                                    {{-- <li><i class="fal fa-phone "></i>92 666 888 0000</li> --}}
+                                                    {{-- <li><i class="fal fa-envelope "></i><a
                                                             href="/cdn-cgi/l/email-protection " class="__cf_email__ "
                                                             data-cfemail="07696262636f626b7747627f666a776b622964686a ">[email&#160;protected]</a>
-                                                    </li>
-                                                    <li><i class="fal fa-globe "></i>www.example.com</li>
+                                                    </li> --}}
+                                                    <li><i class="fal fa-globe "></i>{{ $vendor->user->email }}</li>
                                                 </ul>
                                                 <div class="widget-social ">
-                                                    <a href="# " class="facebook-btn "><i
-                                                            class="fab fa-facebook-f "></i></a>
-                                                    <a href="# " class="twitter-btn "><i
-                                                            class="fab fa-twitter "></i></a>
-                                                    <a href="# " class="youtube-btn "><i
-                                                            class="fab fa-youtube "></i></a>
-                                                    <a href="# " class="tripadvisor-btn "><i
-                                                            class="fab fa-tripadvisor "></i></a>
+                                                    @if ($vendor->facebook)
+                                                    <a href="{{ $vendor->facebook }}" class="facebook-btn "
+                                                        target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                @endif
+                                                @if ($vendor->twitter)
+                                                    <a href="{{ $vendor->twitter }}" class="twitter-btn "
+                                                        target="_blank"><i class="fab fa-twitter"></i></a>
+                                                @endif
+                                                @if ($vendor->youtube)
+                                                    <a href="{{ $vendor->youtube }}" class="youtube-btn "
+                                                        target="_blank"><i class="fab fa-youtube"></i></a>
+                                                @endif
+                                                @if ($vendor->instagram)
+                                                    <a href="{{ $vendor->instagram }}" class="instagram-btn"
+                                                        style="background: black" target="_blank">
+                                                        <i class="fab fa-instagram "></i></a>
+                                                @endif
+
                                                 </div>
                                             </div>
                                         </div>
@@ -698,16 +647,16 @@
             window.location.href = value
         }
 
-        function selectedform(id){
+        function selectedform(id) {
             var staffid = $('#staffselect').val();
             var bookingDate = $('#appointmentdate').val();
             var slotselection = $('#slotselection').val();
             // var selectedids = $("input[name='selectedsubservice[]']:checked").val();
-           var selectedids = []
-           var items = []
-            $('[name="selectedsubservice"]').each( function (){
+            var selectedids = []
+            var items = []
+            $('[name="selectedsubservice"]').each(function() {
                 // selectedids.push()
-               
+
                 let singleService = $(this).val()
                 // console.log(singleService)
                 let singleServiceid = JSON.parse(singleService);
@@ -716,17 +665,17 @@
                 items.push($(this).val())
             });
             var formData = {
-                "vendor_staff_id":staffid,
-                "date":bookingDate,
-                "time":slotselection,
-                "services":selectedids,
-                "vendor_id":id,
-                "items":items
+                "vendor_staff_id": staffid,
+                "date": bookingDate,
+                "time": slotselection,
+                "services": selectedids,
+                "vendor_id": id,
+                "items": items
             }
 
             // console.log(formData)
             localStorage.setItem("data", "");
-            localStorage.setItem("data",JSON.stringify(formData));
+            localStorage.setItem("data", JSON.stringify(formData));
             // window.location('/booking/spiky-salon')
             window.location.href = "/booking/spiky-salon";
         }

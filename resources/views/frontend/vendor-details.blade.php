@@ -164,30 +164,7 @@
                                     <div class="service-sec">
                                         <h5>
                                             Services
-                                            <div class="servicedetails">
-                                                <select class="form-control" id="staffselect">
-                                                    <option value="0">No Alternative</option>
-                                                    @foreach ($staff as $staffsingle)
-                                                        <option value="{{ $staffsingle->id }}">{{ $staffsingle->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="servicedetails">
-                                                <input type="date" id="appointmentdate" name="appointmentime"
-                                                    class="form-control"
-                                                    value="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
-                                                    min="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}">
-                                            </div>
-                                            <div class="servicedetails">
-                                                <select class="form-control" id="slotselection">
-                                                    <option>Select Slot</option>
-                                                    @foreach ($slots as $key => $slot)
-                                                        <option value="{{ $slotsValue[$key] }}">{{ $slot }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            
 
                                         </h5>
                                         {{-- @php
@@ -225,9 +202,35 @@
                                             @endforeach
                                             {{-- <button class="btn btn-primary btn-sm" style="float: right;">Submit</button> --}}
                                         </div>
+                                        <div>
+                                            <div class="servicedetails">
+                                                <select class="form-control" id="staffselect">
+                                                    <option value="0">No Alternative</option>
+                                                    @foreach ($staff as $staffsingle)
+                                                        <option value="{{ $staffsingle->id }}">{{ $staffsingle->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="servicedetails">
+                                                <input type="date" id="appointmentdate" name="appointmentime"
+                                                    class="form-control"
+                                                    value="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
+                                                    min="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}">
+                                            </div>
+                                            <div class="servicedetails">
+                                                <select class="form-control" id="slotselection">
+                                                    <option>Select Slot</option>
+                                                    @foreach ($slots as $key => $slot)
+                                                        <option value="{{ $slotsValue[$key] }}">{{ $slot }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <button class="btn btn-primary btn-sm" style="float: right"
-                                        onclick="selectedform('{{ $vendor->id }}')">Submit</button>
+                                    <button class="btn btn-primary btn-sm" style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;"
+                                        onclick="selectedform('{{ $vendor->id }}')">Book Now</button>
                                     <br>
                                 </div>
                                 <div class="bookwStaff">

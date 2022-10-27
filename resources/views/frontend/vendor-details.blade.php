@@ -95,7 +95,7 @@
                     <div class="news-description">
                         <div class="row">
                             <div class="col-xl-8 col-lg-7">
-                                <div class="desc-box  mb-16">
+                                {{-- <div class="desc-box  mb-16">
                                     <p><span class="first-letter">S</span> Silver Rose Hotel at Novia offers fully furnished
                                         apartments to fit the needs of our pure guests visiting the <a
                                             href="contact.html">New York Metro</a> Area and is conveniently located
@@ -105,9 +105,9 @@
                                     partners. Look out into the Manhattan skyline from the open fully equipped kitchen.
                                     These two bedroom apartments are a perfect example
                                     of unparalleled ambiance offering spectacular views. Decorated to Dharma Home Suites
-                                    feng shui style, you can relax at their accommodation peacefully and privately.</p>
-                                <hr class="mt-47 mb-45">
-                                <div class="info">
+                                    feng shui style, you can relax at their accommodation peacefully and privately.</p> --}}
+                                {{-- <hr class="mt-47 mb-45"> --}}
+                                {{-- <div class="info">
                                     <h5>The space</h5>
                                     It’s quite obvious that Novia was built with the intention to please. For those who are
                                     fitness fanatics, there is an on-site Real Hot Yoga studio. There is a rooftop terrace
@@ -141,7 +141,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                </div> --}}
 
 
 
@@ -316,7 +316,7 @@
 
 
                                 <hr class="mt-20 mb-45 ">
-                                <div class="review-box pb-36 ">
+                                {{-- <div class="review-box pb-36 ">
                                     <h5 class="has-border mb-40 ">User Reviews</h5>
                                     <div class="review-list ">
                                         <div class="single-review fix pb-32 mb-40 ">
@@ -597,7 +597,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-xl-4 col-lg-5 ">
                                 <div class="sidebar-wrapper ">
@@ -632,7 +632,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="single-widget widget-padding mb-30 ">
+                                    {{-- <div class="single-widget widget-padding mb-30 ">
                                         <h4 class="widget-title "><span>//</span> Business Hours</h4>
                                         <ul class="duration-list ">
                                             <li>
@@ -676,7 +676,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

@@ -304,7 +304,6 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
 
-
         $(document).ready(function () {
             
             var allData= JSON.parse(localStorage.getItem('data'))
@@ -318,13 +317,21 @@
                 total += parseInt(tempElement.price)  
                 htmldata += '<div class="list-sec row"><div class="col-lg-9 service-name"><div><h4>'+tempElement.subservicename+'</h4><span>'+tempElement.subserviceminute+'Min</span></div></div><div class="col-lg-3 service-amt"><h4>₹'+tempElement.price+'</h4></div></div>'
             });
-            console.log(total)
+            // console.log(total)
             $('.booking__cart__selected_services').append(htmldata)
             $('.booking__cart__total').append('')
             $('.booking__cart__total').append(total)
             /* 
                 Booking processing start
             */
+            function disableBack() {
+                window.history.forward()
+            }
+            window.onload = disableBack();
+            window.onpageshow = function(e) {
+                if (e.persisted)
+                    disableBack();
+            }
 
             $('[name="payment_type"]').click(function () {
                 let bookingData = allData;
@@ -471,7 +478,10 @@
             }
             // alert(tabID);
         }
+
+    
     </script>
+    
     @livewireScripts
 </body>
 

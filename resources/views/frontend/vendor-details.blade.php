@@ -77,7 +77,8 @@
                                             <div class="news-action flex-md-column">
                                                 {{-- <a href="listing-details.html" class="f-sm-btn"><i
                                                         class="fal fa-heart"></i></a> --}}
-                                                <a  class="f-sm-btn" onclick="copytoClipboard(window.location.href)" style="color: white;"><i class="fal fa-share-alt"></i></a>
+                                                <a class="f-sm-btn" onclick="copytoClipboard(window.location.href)"
+                                                    style="color: white;"><i class="fal fa-share-alt"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +165,7 @@
                                     <div class="service-sec">
                                         <h5>
                                             Services
-                                            
+
 
                                         </h5>
                                         {{-- @php
@@ -229,7 +230,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-sm" style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;"
+                                    <button class="btn btn-primary btn-sm"
+                                        style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;"
                                         onclick="selectedform('{{ $vendor->id }}')">Book Now</button>
                                     <br>
                                 </div>
@@ -237,21 +239,21 @@
                                     <h5>Our Staff</h5>
                                     <div class="row staff">
                                         @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
-                                        <div class="col-lg-3 Staff text-center">
-                                            <a>
-                                                <div class=" staff-img ">
-                                                    <img src="{{ asset('storage/' . $staff->profile_pic) }}">
-                                                </div>
-                                                <h5>{{ Str::words($staff->name, 1) }}</h5>
-                                                @php
-                                                    $staff_services = App\Models\Service::whereIn('id', json_decode($staff->services))
-                                                        ->pluck('name')
-                                                        ->toArray();
-                                                @endphp
-                                                <span>{{ implode(', ', $staff_services) }}</span>
-                                            </a>
-                                        </div>
-                                    @endforeach
+                                            <div class="col-lg-3 Staff text-center">
+                                                <a>
+                                                    <div class=" staff-img ">
+                                                        <img src="{{ asset('storage/' . $staff->profile_pic) }}">
+                                                    </div>
+                                                    <h5>{{ Str::words($staff->name, 1) }}</h5>
+                                                    @php
+                                                        $staff_services = App\Models\Service::whereIn('id', json_decode($staff->services))
+                                                            ->pluck('name')
+                                                            ->toArray();
+                                                    @endphp
+                                                    <span>{{ implode(', ', $staff_services) }}</span>
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
 
@@ -552,7 +554,8 @@
                                             </div>
                                             <div class="map-content pl-20 pr-20 ">
                                                 <ul class="address-list ">
-                                                    <li><i class="fal fa-map-marker-alt "></i>{{ $vendor->firm_address ?? '' }}
+                                                    <li><i
+                                                            class="fal fa-map-marker-alt "></i>{{ $vendor->firm_address ?? '' }}
                                                     </li>
                                                     {{-- <li><i class="fal fa-phone "></i>92 666 888 0000</li> --}}
                                                     {{-- <li><i class="fal fa-envelope "></i><a
@@ -563,22 +566,22 @@
                                                 </ul>
                                                 <div class="widget-social ">
                                                     @if ($vendor->facebook)
-                                                    <a href="{{ $vendor->facebook }}" class="facebook-btn "
-                                                        target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                                @endif
-                                                @if ($vendor->twitter)
-                                                    <a href="{{ $vendor->twitter }}" class="twitter-btn "
-                                                        target="_blank"><i class="fab fa-twitter"></i></a>
-                                                @endif
-                                                @if ($vendor->youtube)
-                                                    <a href="{{ $vendor->youtube }}" class="youtube-btn "
-                                                        target="_blank"><i class="fab fa-youtube"></i></a>
-                                                @endif
-                                                @if ($vendor->instagram)
-                                                    <a href="{{ $vendor->instagram }}" class="instagram-btn"
-                                                        style="background: black" target="_blank">
-                                                        <i class="fab fa-instagram "></i></a>
-                                                @endif
+                                                        <a href="{{ $vendor->facebook }}" class="facebook-btn "
+                                                            target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                                    @endif
+                                                    @if ($vendor->twitter)
+                                                        <a href="{{ $vendor->twitter }}" class="twitter-btn "
+                                                            target="_blank"><i class="fab fa-twitter"></i></a>
+                                                    @endif
+                                                    @if ($vendor->youtube)
+                                                        <a href="{{ $vendor->youtube }}" class="youtube-btn "
+                                                            target="_blank"><i class="fab fa-youtube"></i></a>
+                                                    @endif
+                                                    @if ($vendor->instagram)
+                                                        <a href="{{ $vendor->instagram }}" class="instagram-btn"
+                                                            style="background: black" target="_blank">
+                                                            <i class="fab fa-instagram "></i></a>
+                                                    @endif
 
                                                 </div>
                                             </div>
@@ -646,6 +649,13 @@
 @section('script')
     <script src="{{ asset('storage/frontend/assets/js/vertical-service-tab.js') }}"></script>
     <script>
+
+        $(function() {
+            if (localStorage.getItem("data") !== "") {
+                window.location.href = "/booking/spiky-salon";
+            }
+        })
+
         function movetoBookingpage(value) {
             window.location.href = value
         }
@@ -679,8 +689,9 @@
             // console.log(formData)
             localStorage.setItem("data", "");
             localStorage.setItem("data", JSON.stringify(formData));
-            // window.location('/booking/spiky-salon')
-            window.location.href = "/booking/spiky-salon";
+
+            window.location('/booking/spiky-salon')
+
         }
 
         function copytoClipboard(value) {

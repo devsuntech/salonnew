@@ -353,7 +353,8 @@
                 $.post( "<?= route('booking.create.pay_at_vendor'); ?>", bookingData)
                 .done(function( data ) {
                     alert ('Your booking is confirmed, booking ID is: ' + data.id);
-                    window.location = '<?= route('user.profile'); ?>'
+                    localStorage.removeItem("data");
+                    window.location = '<?= route('user.orders'); ?>'
                 })
                 .fail(function() {
                     alert( "error" );
@@ -369,7 +370,9 @@
                 $.post( "<?= route('booking.payment.razorpay.verify'); ?>", response)
                 .done(function( data ) {
                     alert ('Your booking is confirmed, booking ID is: ' + data.booking_id);
-                    window.location = '<?= route('user.profile'); ?>'
+                    localStorage.removeItem("data");
+                    window.location = '<?= route('user.orders'); ?>'
+                   
                 })
                 .fail(function() {
                     alert( "error" );

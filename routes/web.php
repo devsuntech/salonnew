@@ -116,6 +116,7 @@ Route::post('getSubService',[HomeController::class,'getSubService'])->name('getS
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['customer']], function () {
     Route::get('profile',[HomeController::class,'userProfile'])->name('profile');
     Route::post('profile',[HomeController::class,'userProfileupdate'])->name('userProfileupdate');
+    Route::get('orders',[HomeController::class,'ordersProfile'])->name('orders');
 });
 
 //Pages
@@ -244,8 +245,8 @@ Route::group(['prefix' => 'vendor', 'as' => 'vendor.', 'middleware' => ['vendor'
     Route::post('active/coupon',[CouponController::class,'ActiveCoupon'])->name('active.coupon');
     
     Route::get('bookings',[BookingController::class,'vendorBookings'])->name('bookings');
-        Route::get('queries/add',[QueryController::class,'vendorCreateQueries'])->name('queries.add');
-        Route::post('queries/add',[QueryController::class,'vendorStoreQueries'])->name('queries.storequery');
+    Route::get('queries/add',[QueryController::class,'vendorCreateQueries'])->name('queries.add');
+    Route::post('queries/add',[QueryController::class,'vendorStoreQueries'])->name('queries.storequery');
 
     Route::get('allinvoices',[AdminController::class,'allinvoices'])->name('allinvoices');
     Route::get('addinvoice',[AdminController::class,'addinvoice'])->name('addinvoice');

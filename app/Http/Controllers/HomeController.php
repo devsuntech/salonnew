@@ -9,6 +9,7 @@ use App\Models\SubService;
 use App\Models\Vendor;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\VendorCoupon;
@@ -147,6 +148,25 @@ class HomeController extends Controller
     public function userProfile()
     {
        return view('frontend.user-profile');
+    }
+
+    public function ordersProfile()
+    {
+        $id = Auth::user()->id;
+        $orders = Booking::where('customer_id',$id)->with('bookingDetail')->orderBy('id','desc')->paginate(5);
+        // dd($orders->bookingDetail[0]->);
+        $serviceName = [];
+        foreach ($orders as $key => $value) {
+            if (count($value->bookingDetail) > 0) {
+               foreach ($value->bookingDetail as $key => $val) {
+                // dd($val);
+                $serviceName[] = $val->services->vendorservicedetails->name;
+               }
+            }
+            $value['servicename']= $serviceName;
+        }
+        // dd($orders);
+       return view('frontend.user-order',compact('orders'));
     }
 
     public function userProfileupdate(Request $request)

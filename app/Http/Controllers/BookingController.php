@@ -26,7 +26,7 @@ class BookingController extends Controller
 
     public function vendorBookings(Request $request)
     {
-        $datas=Booking::latest()->paginate(10);
+        $datas=Booking::with('bookingDetail')->latest()->paginate(10);
         // dd($datas);
         return view('vendor.order.index',compact('datas'));
     }
@@ -44,6 +44,7 @@ class BookingController extends Controller
             'time' => 'required',
             'services' => 'required|array'
         ]);
+        // dd($validated);
         $booking_data = [
             'vendor_id' => $validated['vendor_id'],
             'customer_id' => Auth::user()->id,
@@ -67,19 +68,20 @@ class BookingController extends Controller
 
     private function calculateTotalAmount (array $services): int
     {
-        $services_array =  (new VendorService())->whereIn('id', $services)->get();
+        $services_array = (new VendorService())->whereIn('id', $services)->get();
         $total_amount = 0;
 
         foreach ($services_array as $service) {
             $total_amount += $service->price;
         }
 
-        return $total_amount * 100;
+        return $total_amount;
     }
 
     private function prepareBookingDetailArray (array $validated_data): array
     {
         $services_array =  (new VendorService())->whereIn('id', $validated_data['services'])->get();
+        // dd($services_array);
         $boking_detail_data = [];
         foreach ($services_array as $service) {
             $boking_detail_data[] = new BookingDetail([

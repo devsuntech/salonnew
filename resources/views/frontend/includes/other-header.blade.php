@@ -63,7 +63,12 @@
                         <div class="d-inline-block ">
                             @auth
                                 @if(Auth::user()->user_type=='customer')
-                                    <div class="header-btn">
+                                <div class="header-btn ">
+                                    <a href="{{ route('user.orders') }}">
+                                        Orders <i class="far fa-user"></i>
+                                    </a>
+                                </div>
+                                    <div class="header-btn logout-head">
                                         <a href="{{ route('user.profile') }}">
                                             Profile <i class="far fa-user"></i>
                                         </a>

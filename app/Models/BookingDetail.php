@@ -28,4 +28,10 @@ class BookingDetail extends Model
     {
         return $this->belongsTo(Booking::class);
     }
+
+    public function services()
+    {
+        return $this->hasOne(VendorService::class,'id','sub_service_id');
+    }
+
 }

@@ -87,6 +87,8 @@
                         </div>
                     </div>
                     <div class="card-body">
+
+                        
                             <h6 class="heading-small text-muted mb-4">User information</h6>
                             <div class="">
                                 <div class="row">

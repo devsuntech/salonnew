@@ -195,7 +195,7 @@
                                                             <div class="right-serv" style="display: flex">
                                                                 <h5>₹{{ $value->price }}</h5>
                                                                 <input type="checkbox" name="selectedsubservice"
-                                                                    value='{"price":"{{ $value->price }}","subserviceid":"{{ $value->subservice_id }}","subservicename":"{{ $value->vendorsubservicedetails->name }}","subserviceminute":"{{ $value->minimum_time }}"}' />
+                                                                    value='{"price":"{{ $value->price }}","subserviceid":"{{ $value->subservice_id }}","subservicename":"{{ $value->vendorsubservicedetails->name }}","subserviceminute":"{{ $value->minimum_time }}","vendorserviceid":"{{ $value->id }}"}' />
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -649,9 +649,10 @@
 @section('script')
     <script src="{{ asset('storage/frontend/assets/js/vertical-service-tab.js') }}"></script>
     <script>
-
+        // console.log()
         $(function() {
-            if (localStorage.getItem("data") !== "") {
+
+            if (localStorage.getItem("data") !== "" && localStorage.getItem("data") !==null) {
                 window.location.href = "/booking/spiky-salon";
             }
         })
@@ -665,32 +666,35 @@
             var bookingDate = $('#appointmentdate').val();
             var slotselection = $('#slotselection').val();
             // var selectedids = $("input[name='selectedsubservice[]']:checked").val();
-            var selectedids = []
-            var items = []
+            var selectedids = [];
+            var items = [];
+            var total_amount = 0;
             $('[name="selectedsubservice"]').each(function() {
                 // selectedids.push()
 
                 let singleService = $(this).val()
-                // console.log(singleService)
+                
                 let singleServiceid = JSON.parse(singleService);
                 // console.log(singleServiceid)
-                selectedids.push(singleServiceid.subserviceid)
-                items.push($(this).val())
+                selectedids.push(singleServiceid.vendorserviceid);
+                total_amount += parseInt(singleServiceid.price); 
+                items.push($(this).val());
             });
             var formData = {
                 "vendor_staff_id": staffid,
                 "date": bookingDate,
                 "time": slotselection,
-                "services": selectedids,
+                "services":selectedids,
                 "vendor_id": id,
-                "items": items
+                "items": items,
+                "total_amount":total_amount
             }
 
             // console.log(formData)
             localStorage.setItem("data", "");
             localStorage.setItem("data", JSON.stringify(formData));
 
-            window.location('/booking/spiky-salon')
+            window.location.replace('/booking/spiky-salon')
 
         }
 

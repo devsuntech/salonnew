@@ -31,7 +31,9 @@ class Booking extends Model
         'booking_date',
         'booking_time',
         'booking_status',
-        'note'
+        'note',
+        'rating_number',
+        'rating_review'
     ];
 
     /**

@@ -117,6 +117,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['customer']]
     Route::get('profile',[HomeController::class,'userProfile'])->name('profile');
     Route::post('profile',[HomeController::class,'userProfileupdate'])->name('userProfileupdate');
     Route::get('orders',[HomeController::class,'ordersProfile'])->name('orders');
+    Route::post('booking/review',[HomeController::class,'review'])->name('reviews');
+
 });
 
 //Pages

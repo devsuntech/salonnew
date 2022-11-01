@@ -52,7 +52,7 @@ class VendorStaffController extends Controller
             $data->services='[]';
         }
         if($request->hasFile('profile_pic')){
-           $data->profile_pic = $request->profile_pic->store('uploads/staff');
+           $data->profile_pic = $request->profile_pic->store('uploads/staff', 'public');
         }
         if($data->save()) {
                 return back()->with('success','Staff Add successfully !!');

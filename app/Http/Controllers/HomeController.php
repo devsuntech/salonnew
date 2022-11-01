@@ -207,6 +207,15 @@ class HomeController extends Controller
         }
     }
 
+
+    public function review(Request $request){
+        // dd($request->all());
+        $query = Booking::find($request->bookingid)->update(['rating_number'=>$request->rating,'rating_review'=>$request->bookingText]);
+        // dd($query);
+        return response('Rating Created Successfully!', 200)
+        ->header('Content-Type', 'text/plain');
+    }
+
     public function aboutUs()
     {
         $page=Page::find(1);

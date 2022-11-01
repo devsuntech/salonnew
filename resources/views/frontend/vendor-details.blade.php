@@ -217,15 +217,16 @@
                                                 <input type="date" id="appointmentdate" name="appointmentime"
                                                     class="form-control"
                                                     value="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
-                                                    min="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}">
+                                                    min="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
+                                                    onchange="onselectDate(event)">
                                             </div>
                                             <div class="servicedetails">
                                                 <select class="form-control" id="slotselection">
-                                                    <option>Select Slot</option>
-                                                    @foreach ($slots as $key => $slot)
+
+                                                    {{-- @foreach ($slots as $key => $slot)
                                                         <option value="{{ $slotsValue[$key] }}">{{ $slot }}
                                                         </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -652,7 +653,7 @@
         // console.log()
         $(function() {
 
-            if (localStorage.getItem("data") !== "" && localStorage.getItem("data") !==null) {
+            if (localStorage.getItem("data") !== "" && localStorage.getItem("data") !== null) {
                 window.location.href = "/booking/spiky-salon";
             }
         })
@@ -673,21 +674,21 @@
                 // selectedids.push()
 
                 let singleService = $(this).val()
-                
+
                 let singleServiceid = JSON.parse(singleService);
                 // console.log(singleServiceid)
                 selectedids.push(singleServiceid.vendorserviceid);
-                total_amount += parseInt(singleServiceid.price); 
+                total_amount += parseInt(singleServiceid.price);
                 items.push($(this).val());
             });
             var formData = {
                 "vendor_staff_id": staffid,
                 "date": bookingDate,
                 "time": slotselection,
-                "services":selectedids,
+                "services": selectedids,
                 "vendor_id": id,
                 "items": items,
-                "total_amount":total_amount
+                "total_amount": total_amount
             }
 
             // console.log(formData)
@@ -724,5 +725,76 @@
 
 
         }
+
+        function onselectDate(selectedDate) {
+            riderSlots(selectedDate.target.value);
+        }
+
+
+        function riderSlots(dateCurrent) {
+
+            //Data
+            var currentDate = moment().utcOffset("+05:30").format('YYYY-MM-DD')
+            var currentTime = moment().utcOffset("+05:30").format('HH:mm')
+            var currentMinutes = parseInt(currentTime.split(":")[1])
+            var currentHours = parseInt(currentTime.split(":")[0])
+            var openTime = ""
+            if (currentMinutes < 30) {
+                currentTime = '' + currentHours + ':30';
+            } else {
+                currentHours = parseInt(currentHours) + 1;
+                currentTime = '' + currentHours + ':00'
+            }
+            console.log("here", currentDate, currentTime, dateCurrent)
+
+            if (currentDate !== dateCurrent) {
+                openTime = "11:00";
+            } else {
+                openTime = currentTime;
+            }
+            let x = {
+                slotInterval: 30,
+                openTime: openTime,
+                closeTime: '19:00'
+            };
+
+            //Format the time
+            let startTime = moment(x.openTime, "HH:mm");
+
+            //Format the end time and the next day to it 
+            let endTime = moment(x.closeTime, "HH:mm");
+
+            //Times
+            let allTimes = [];
+
+            //Loop over the times - only pushes time with 30 minutes interval
+            while (startTime < endTime) {
+                //Push times
+                allTimes.push(startTime.format("HH:mm"));
+                //Add interval of 30 minutes
+                startTime.add(x.slotInterval, 'minutes');
+            }
+
+            // console.log(allTimes);s
+            var slotHtml = "<option> Select Slot </option>";
+
+            if (allTimes.length == 0) {
+                slotHtml = "<option>No Slots Available for today kindly change date</option>"
+                $('#slotselection').html('');
+                $('#slotselection').append(slotHtml);
+            } else {
+                allTimes.forEach((value, index) => {
+                    // console.log(value,index)
+                    slotHtml += '<option value=' + value + '>' + value + '</option>';
+                })
+                $('#slotselection').html('');
+                $('#slotselection').append(slotHtml);
+            }
+
+
+
+        }
+
+        riderSlots(moment().utcOffset("+05:30").format('YYYY-MM-DD'))
     </script>
 @endsection

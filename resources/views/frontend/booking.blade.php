@@ -459,6 +459,7 @@
         
         function cancelService(){
                 localStorage.removeItem("data");
+                window.location.href = '/';
             }
         // $('body').on('click',
         //     '.book__select_time_date_box.next_button.enabled, .book__select_time_date_box.prev_button.enabled',

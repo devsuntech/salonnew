@@ -55,7 +55,7 @@
     <script src="/storage/frontend/assets/js/jquery-3.6.0.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
     <script src="/storage/frontend/assets/js/meanmenu.min.js "></script>
-    <script src="/storage/frontend/assets/js/back-to-top.min.js "></script>
+    {{-- <script src="/storage/frontend/assets/js/back-to-top.min.js "></script> --}}
     <script src="/storage/frontend/assets/js/popper.min.js "></script>
     <script src="/storage/frontend/assets/js/nice-select.min.js "></script>
     <script src="/storage/frontend/assets/js/bootstrap.min.js "></script>

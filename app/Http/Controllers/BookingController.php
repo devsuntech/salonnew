@@ -35,6 +35,36 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    private function calculateTotalAmount (array $services): int
+    {
+        $services_array = (new VendorService())->whereIn('id', $services)->get();
+        $total_amount = 0;
+
+        foreach ($services_array as $service) {
+            $total_amount += $service->price;
+        }
+
+        return $total_amount;
+    }
+
+    private function prepareBookingDetailArray (array $validated_data): array
+    {
+        $services_array =  (new VendorService())->whereIn('id', $validated_data['services'])->get();
+        // dd($services_array);
+        $boking_detail_data = [];
+        foreach ($services_array as $service) {
+            $boking_detail_data[] = new BookingDetail([
+                'sub_service_id' => $service->id,
+                'vendor_staff_id' => $validated_data['vendor_staff_id'],
+                'status' => 1
+            ]);
+        }
+
+        return $boking_detail_data;
+    }
+
     public function createPayAtVendorBooking(Request $request, Booking $booking)
     {
         $validated = $request->validate([
@@ -64,34 +94,6 @@ class BookingController extends Controller
         }
         
         return response()->json($booking);
-    }
-
-    private function calculateTotalAmount (array $services): int
-    {
-        $services_array = (new VendorService())->whereIn('id', $services)->get();
-        $total_amount = 0;
-
-        foreach ($services_array as $service) {
-            $total_amount += $service->price;
-        }
-
-        return $total_amount;
-    }
-
-    private function prepareBookingDetailArray (array $validated_data): array
-    {
-        $services_array =  (new VendorService())->whereIn('id', $validated_data['services'])->get();
-        // dd($services_array);
-        $boking_detail_data = [];
-        foreach ($services_array as $service) {
-            $boking_detail_data[] = new BookingDetail([
-                'sub_service_id' => $service->id,
-                'vendor_staff_id' => $validated_data['vendor_staff_id'],
-                'status' => 1
-            ]);
-        }
-
-        return $boking_detail_data;
     }
 
     /**

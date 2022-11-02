@@ -670,9 +670,9 @@
             var selectedids = [];
             var items = [];
             var total_amount = 0;
-            $('[name="selectedsubservice"]').each(function() {
+            $('[name="selectedsubservice"]:checked').each(function() {
                 // selectedids.push()
-
+                
                 let singleService = $(this).val()
 
                 let singleServiceid = JSON.parse(singleService);
@@ -691,7 +691,7 @@
                 "total_amount": total_amount
             }
 
-            // console.log(formData)
+            console.log(formData)
             localStorage.setItem("data", "");
             localStorage.setItem("data", JSON.stringify(formData));
 

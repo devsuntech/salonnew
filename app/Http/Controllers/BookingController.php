@@ -46,7 +46,7 @@ class BookingController extends Controller
             $total_amount += $service->price;
         }
 
-        return $total_amount;
+        return $total_amount * 100;
     }
 
     private function prepareBookingDetailArray (array $validated_data): array

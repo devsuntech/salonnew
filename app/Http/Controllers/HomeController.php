@@ -117,19 +117,17 @@ class HomeController extends Controller
     public function vendorDetail($slug)
     {
         if ($vendor=Vendor::whereSlug($slug)->first()) {
-            // dd($vendor);;
             $vendorDetails = VendorService::where('vendor_id',$vendor->id)->get()->groupBy('service_id');
-            $period = new CarbonPeriod('11:00', '30 minutes', '19:30'); // for create use 24 hours format later change format 
-            $slots = [];
-            $slotsValue = [];
-            foreach($period as $item){
-                array_push($slots,$item->format("h:i A"));
-                array_push($slotsValue,$item->format("h:i"));
-            }
             $staff = VendorStaff::where('vendor_id',$vendor->id)->get();
-            // dd($slots);
-            // dd($vendorDetails);
-            return view('frontend.vendor-details',compact('vendorDetails','vendor','slots','staff','slotsValue'));
+            $rating = Booking::where('rating_number','!=',0)->where('vendor_id',$vendor->id)->avg('rating_number');
+            // dd($rating);
+            if ($rating) {
+                $rating = number_format($rating,1);
+            }else{
+                $rating = 3;
+            }
+            
+            return view('frontend.vendor-details',compact('vendorDetails','vendor','rating','staff'));
         } else{
             abort(404);
         }

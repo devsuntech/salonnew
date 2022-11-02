@@ -48,6 +48,18 @@ class BookingController extends Controller
 
         return $total_amount * 100;
     }
+    
+    private function calculateTotalAmountPayatVendor (array $services): int
+    {
+        $services_array = (new VendorService())->whereIn('id', $services)->get();
+        $total_amount = 0;
+
+        foreach ($services_array as $service) {
+            $total_amount += $service->price;
+        }
+
+        return $total_amount;
+    }
 
     private function prepareBookingDetailArray (array $validated_data): array
     {
@@ -83,7 +95,7 @@ class BookingController extends Controller
             'booking_date' => $validated['date'],
             'booking_time' => $validated['time'],
             'booking_status' => 'Confirmed',
-            'total_amount' => $this->calculateTotalAmount($validated['services'])
+            'total_amount' => $this->calculateTotalAmountPayatVendor($validated['services'])
         ];
         $booking->fill($booking_data)->save();
         $booking->bookingDetail()->saveMany($this->prepareBookingDetailArray($validated));
@@ -179,7 +191,11 @@ class BookingController extends Controller
         $booking->online_payment_method_data = $razorpay_payment_data;
         $booking->save();
         // Mail::to('sandeepdhabhai2016@gmail.com')->send(new EmailBookingOwner('Sunnny'));
-        Mail::to(Auth::user()->email)->send(new EmailBookingUser());
+        try {
+            Mail::to(Auth::user()->email)->send(new EmailBookingUser());
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return $booking;
     }
 

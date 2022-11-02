@@ -42,7 +42,7 @@
                                                         class="fal fa-check-circle"></i></a> </h4>
                                             <div class="author-meta d-md-flex">
                                                 <div class="rating-2 mr-13  mb-10 mb-sm-0">
-                                                    <span>4.8</span>
+                                                    <span>{{$rating ?? ''}}</span>
                                                     <i class="fas fa-star icon-default"></i>
                                                     <i class="fas fa-star icon-default"></i>
                                                     <i class="fas fa-star icon-default"></i>

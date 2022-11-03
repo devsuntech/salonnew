@@ -144,7 +144,7 @@
                         </div>
 
                         <div class="book__wrapper white-bg">
-                            <div class="service-list" >
+                            <div class="service-list">
                                 <label for="pay-at-vendor">
                                     <div class="list-sec row">
                                         <div class="col-lg-9 service-name">
@@ -159,13 +159,14 @@
                                             </div>
                                         </div>
                                         <div class="checkbox col-lg-3 text-right">
-                                            <input class="d-none" type="radio" name="payment_type" value="pay-at-vendor" id="pay-at-vendor" />
+                                            <input class="d-none" type="radio" name="payment_type"
+                                                value="pay-at-vendor" id="pay-at-vendor" />
                                             <i class="fas fa-angle-right"></i>
                                         </div>
                                     </div>
                                 </label>
                             </div>
-                            <div class="service-list" >
+                            <div class="service-list">
                                 <label for="razorpay">
                                     <div class="list-sec row">
                                         <div class="col-lg-9 service-name">
@@ -249,7 +250,8 @@
                                             </div>
                                         </div>
                                         <div class="checkbox col-lg-3 text-right">
-                                            <input class="d-none" type="radio" name="payment_type" value="razorpay" id="razorpay" />
+                                            <input class="d-none" type="radio" name="payment_type"
+                                                value="razorpay" id="razorpay" />
                                             <i class="fas fa-angle-right"></i>
                                         </div>
                                     </div>
@@ -375,19 +377,19 @@
             /* 
                 Booking processing start
             */
-     
 
-            $('[name="payment_type"]').click(function (event) {
+
+            $('[name="payment_type"]').click(function(event) {
                 let bookingData = allData;
                 bookingData._token = '<?= csrf_token() ?>';
-                let checkPaymentDetails= event.target.value;
+                let checkPaymentDetails = event.target.value;
                 if (checkPaymentDetails == 'pay-at-vendor') {
                     let confirmBooking = confirm("Do you want to confirm the booking?")
                     if (confirmBooking) {
                         createPayAtVendorBooking(bookingData);
                     }
                     return;
-                } else if(checkPaymentDetails == 'razorpay') {
+                } else if (checkPaymentDetails == 'razorpay') {
                     createRazorpayBooking(bookingData);
                 }
                 // console.log("here")
@@ -456,11 +458,17 @@
             */
 
         });
-        
-        function cancelService(){
+
+        function cancelService() {
+            let text = "Are You Sure You Want to Cancel this Booking ?";
+            if (confirm(text) == true) {
                 localStorage.removeItem("data");
                 window.location.href = '/';
+            } else {
+                // text = "You canceled!";
             }
+          
+        }
         // $('body').on('click',
         //     '.book__select_time_date_box.next_button.enabled, .book__select_time_date_box.prev_button.enabled',
         //     function() {
@@ -472,9 +480,9 @@
         //         if ($(this).hasClass('next_button')) {
         //             for (let itemNumber = 1; itemNumber <= 5; itemNumber++) {
         //                 dateBoxItems += `<div class="book__select_time_date_box col-md-2${ (itemNumber == 1) ? ' active' : ''}" data-day="${Date.parse(lastDay).add(itemNumber).day().toString('MM/dd/yyyy')}">
-        //                                 <div>${Date.parse(lastDay).add(itemNumber).day().toString('ddd')}</div>
-        //                                 <div>${Date.parse(lastDay).add(itemNumber).day().toString(' d')}</div>
-        //                                 </div>`;
+    //                                 <div>${Date.parse(lastDay).add(itemNumber).day().toString('ddd')}</div>
+    //                                 <div>${Date.parse(lastDay).add(itemNumber).day().toString(' d')}</div>
+    //                                 </div>`;
         //                 if (itemNumber == 1) {
         //                     newFirstDay = Date.parse(lastDay).add(itemNumber).day();
         //                 }
@@ -482,9 +490,9 @@
         //         } else {
         //             for (let itemNumber = 5; itemNumber > 0; itemNumber--) {
         //                 dateBoxItems += `<div class="book__select_time_date_box col-md-2${ (itemNumber == 5) ? ' active' : ''}" data-day="${Date.parse(firstDay).add(-itemNumber).day().toString('MM/dd/yyyy')}">
-        //                                 <div>${Date.parse(firstDay).add(-itemNumber).day().toString('ddd')}</div>
-        //                                 <div>${Date.parse(firstDay).add(-itemNumber).day().toString(' d')}</div>
-        //                                 </div>`;
+    //                                 <div>${Date.parse(firstDay).add(-itemNumber).day().toString('ddd')}</div>
+    //                                 <div>${Date.parse(firstDay).add(-itemNumber).day().toString(' d')}</div>
+    //                                 </div>`;
         //                 if (itemNumber == 5) {
         //                     newFirstDay = Date.parse(firstDay).add(-itemNumber).day();
         //                 }
@@ -535,7 +543,6 @@
         //     }
         //     // alert(tabID);
         // }
-
     </script>
 
     @livewireScripts

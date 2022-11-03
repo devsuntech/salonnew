@@ -206,7 +206,8 @@
                                         <div>
                                             <div class="servicedetails">
                                                 <select class="form-control" id="staffselect">
-                                                    <option value="0">No Alternative</option>
+                                                    <option value="0">Select Staff</option>
+                                                    <option value="0">No Prefrernce</option>
                                                     @foreach ($staff as $staffsingle)
                                                         <option value="{{ $staffsingle->id }}">{{ $staffsingle->name }}
                                                         </option>

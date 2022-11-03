@@ -122,6 +122,7 @@ class BookingController extends Controller
             'services' => 'required|array'
         ]);
         $total_amount = $this->calculateTotalAmount($validated['services']);
+        $total_amount_db = $this->calculateTotalAmountPayatVendor($validated['services']);
         $booking_data = [
             'vendor_id' => $validated['vendor_id'],
             'customer_id' => Auth::user()->id,
@@ -131,7 +132,7 @@ class BookingController extends Controller
             'booking_time' => $validated['time'],
             'booking_status' => 'Pending',
             'online_payment_method' => 'razorpay',
-            'total_amount' => $total_amount
+            'total_amount' => $total_amount_db
         ];
         $booking->fill($booking_data)->save();
         $booking->online_payment_method_ref_id = $this->createRazorpayOrder([

@@ -31,7 +31,7 @@
 
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="gallery_image" multiple>
+                                        <input type="file" class="custom-file-input" name="gallery_image[]" multiple>
                                         <label class="custom-file-label">Choose Image</label>
                                     </div>
                                 </div>

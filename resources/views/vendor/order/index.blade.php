@@ -50,18 +50,6 @@
                   </tr>
                   @endforeach
                   </tbody>
-                  <tfoot>
-                    <tr>
-                        <th>S.NO.</th>
-                        <th>Booking No</th>
-                        <th>Name</th>
-                        <th>Mobile</th>
-                        <th>Payment Status</th>
-                        <th>Date & Time</th>
-                        <th>Booking Date</th>
-                        <th>Option</th>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
         </div>

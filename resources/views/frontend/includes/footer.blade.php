@@ -20,9 +20,9 @@
                         </p>
                         <div class="social-logo">
                             <a href="{{ App\Models\Setting::find(1)->facebook ?? 'https://facebook.com' }}"  target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="{{ App\Models\Setting::find(1)->facebook ?? 'https://twitter.com' }}"  target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="{{ App\Models\Setting::find(1)->facebook ?? 'https://instagram.com' }}"  target="_blank" class="behance"><i class="fab fa-instagram"></i></a>
-                            <a href="{{ App\Models\Setting::find(1)->facebook ?? 'https://youtube.com' }}"  target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                            <a href="{{ App\Models\Setting::find(1)->twitter ?? 'https://twitter.com' }}"  target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ App\Models\Setting::find(1)->instagram ?? 'https://instagram.com' }}"  target="_blank" class="behance"><i class="fab fa-instagram"></i></a>
+                            <a href="{{ App\Models\Setting::find(1)->linkedin ?? 'https://youtube.com' }}"  target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>

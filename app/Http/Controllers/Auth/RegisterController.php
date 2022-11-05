@@ -44,14 +44,14 @@ class RegisterController extends Controller
         $request->validate([
             'first_name' => 'required|max:120|min:3',
             'last_name' => 'nullable|max:120|min:3',
-            'gender' => 'required|in:Male,Female,male,female',
+            'gender' => 'required|in:Male,Female,male,female,other,Other',
             'mobile' => 'required|digits:10|unique:App\Models\User',
             'email' => 'required|email|unique:App\Models\User',
             'date_of_birth' => 'required|date',
-            'country' => 'nullable|max:120',
-            'state' => 'required|max:120',
-            'city' => 'required|max:120',
-            'pin_code' => 'required|digits:6',
+            // 'country' => 'nullable|max:120',
+            // 'state' => 'required|max:120',
+            // 'city' => 'required|max:120',
+            // 'pin_code' => 'required|digits:6',
             'terms_conditions' => 'required',
             'password' => 'required|string|confirmed|min:6',
         ]);
@@ -73,7 +73,12 @@ class RegisterController extends Controller
             $customer->pincode=$request->pin_code;
             $customer->status=1;
             if($customer->save()) {
-                Mail::to($request->email)->send(new EmailWelcomeUser());
+                try {
+                    Mail::to($request->email)->send(new EmailWelcomeUser());
+
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
                return redirect()->route('login')->with('success','You are successfully register');
             } else{
                return back()->with('error','Something Went Wrong');

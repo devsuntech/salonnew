@@ -363,7 +363,7 @@
                             <p>
                                 It is a long established fact that a reader will be distracted by the readable content of a page
                             </p>
-                            <a href="listings-grid-right-sidebar.html" class="a-btn a-btn-space mt-40">
+                            <a href="{{route('search.salon')}}" class="a-btn a-btn-space mt-40">
                                 Check Salons
                             </a>
                         </div>

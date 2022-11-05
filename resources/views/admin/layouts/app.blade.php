@@ -45,7 +45,11 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
+                @if(Auth::user()->user_type=='admin')
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                @elseif(Auth::user()->user_type=='vendor')
+                <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}">Home</a></li>
+                @endif
                 <li class="breadcrumb-item active">@yield('meta_title')</li>
               </ol>
             </div><!-- /.col -->

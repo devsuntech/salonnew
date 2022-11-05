@@ -43,7 +43,7 @@ class VendorGalleryController extends Controller
         $data=new VendorGallery();
         $data->vendor_id=Auth::user()->vendor->id;
         if($request->hasFile('gallery_image')){
-           $data->image = $request->gallery_image->store('uploads/gallery');
+           $data->image = $request->gallery_image->store('uploads/gallery', 'public');
         }
         if($data->save()) {
                 return back()->with('success','Gallery Add successfully !!');

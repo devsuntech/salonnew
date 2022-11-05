@@ -45,7 +45,7 @@
                                                 <div class="featured-wrap-3 mb-30 style-2 mb-30">
                                                     <a href="{{ route('vendor.detail',$vendor->slug) }}">
                                                     <div class="thumb">
-                                                        <img src="{{ $vendor->feature_image ?  asset('storage/'.$vendor->feature_image) : '/public/placeholdersalon.png' }}" alt="thumb" style="min-height: 363px">
+                                                        <img src="{{ $vendor->feature_image ?  asset('storage/'.$vendor->feature_image) : '/placeholdersalon.png' }}" alt="thumb" style="min-height: 363px">
                                                         <span class="rating  rating-2"><i class="fal fa-heart"></i>
                                                             4.8</span>
                                                     </div>

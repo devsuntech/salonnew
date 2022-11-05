@@ -107,7 +107,8 @@ class HomeController extends Controller
     public function listingPageByCategory($slug)
     {
         if ($category_id=Category::whereSlug($slug)->first()->id) {
-          $vendors=Vendor::whereServices($category_id)->whereStatusId(4)->paginate(9);
+          $vendors=Vendor::whereJsonContains('services',"$category_id")->where('status_id',4)->paginate(9);
+        //   dd($vendors);
           return view('frontend.vendor-listing',compact('vendors'));
         } else {
             abort(404);

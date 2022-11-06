@@ -42,7 +42,7 @@
                                                         class="fal fa-check-circle"></i></a> </h4>
                                             <div class="author-meta d-md-flex">
                                                 <div class="rating-2 mr-13  mb-10 mb-sm-0">
-                                                    <span>{{$rating ?? ''}}</span>
+                                                    <span>{{ $rating ?? '' }}</span>
                                                     <i class="fas fa-star icon-default"></i>
                                                     <i class="fas fa-star icon-default"></i>
                                                     <i class="fas fa-star icon-default"></i>
@@ -163,10 +163,10 @@
                                 {{-- <hr class="mt-20 mb-45"> --}}
                                 <div class="services-tabs" style="margin: 20px">
                                     <div class="service-sec">
-                                        <h5>
+                                        <h5 >
                                             Services
 
-
+                                            <span id="servicesdetailsheading"></span>
                                         </h5>
                                         {{-- @php
                                            dd($vendorDetails);
@@ -206,7 +206,7 @@
                                         <div>
                                             <div class="servicedetails">
                                                 <select class="form-control" id="staffselect">
-                                                    <option value="0">Select Staff</option>
+                                                    <option value="null">Select Staff</option>
                                                     <option value="0">No Prefrernce</option>
                                                     @foreach ($staff as $staffsingle)
                                                         <option value="{{ $staffsingle->id }}">{{ $staffsingle->name }}
@@ -234,7 +234,7 @@
                                     </div>
                                     <button class="btn btn-primary btn-sm"
                                         style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;"
-                                        onclick="selectedform('{{ $vendor->id }}')">Book Now</button>
+                                        onclick="Validation('{{ $vendor->id }}')">Book Now</button>
                                     <br>
                                 </div>
                                 <div class="bookwStaff">
@@ -663,6 +663,40 @@
             window.location.href = value
         }
 
+        function Validation(id) {
+            var staffid = $('#staffselect').val();
+            var slotselection = $('#slotselection').val();
+            // console.log(staffid);
+            var selectedservices =  $('[name="selectedsubservice"]:checked').val();
+            if (selectedservices === undefined) {
+                $('#servicesdetailsheading').after('<span style="color:red">The Service Selection is required</span>');
+
+            }
+            // console.warn(selectedservices);
+            if (staffid === 'null') {
+                $("#staffselect").css({
+                    "border": "1px solid",
+                    "color": "red"
+                });
+                $('#staffselect').after('<span style="color:red">The Staff Selection is required</span>');
+                // console.log(staffid);
+                if (slotselection === 'null') {
+                    $("#slotselection").css({
+                        "border": "1px solid",
+                        "color": "red"
+                    });
+                    $('#slotselection').after('<span style="color:red">The Slot Selection is required</span>');
+                    return '';
+                }
+                selectedform(id);
+            }
+
+
+
+
+            
+        }
+
         function selectedform(id) {
             var staffid = $('#staffselect').val();
             var bookingDate = $('#appointmentdate').val();
@@ -673,7 +707,7 @@
             var total_amount = 0;
             $('[name="selectedsubservice"]:checked').each(function() {
                 // selectedids.push()
-                
+
                 let singleService = $(this).val()
 
                 let singleServiceid = JSON.parse(singleService);
@@ -746,7 +780,7 @@
                 currentHours = parseInt(currentHours) + 1;
                 currentTime = '' + currentHours + ':00'
             }
-            console.log("here", currentDate, currentTime, dateCurrent)
+            // console.log("here", currentDate, currentTime, dateCurrent)
 
             if (currentDate !== dateCurrent) {
                 openTime = "11:00";
@@ -777,10 +811,10 @@
             }
 
             // console.log(allTimes);s
-            var slotHtml = "<option> Select Slot </option>";
+            var slotHtml = "<option value='null'> Select Slot </option>";
 
             if (allTimes.length == 0) {
-                slotHtml = "<option>No Slots Available for today kindly change date</option>"
+                slotHtml = "<option value='null'>No Slots Available for today kindly change date</option>"
                 $('#slotselection').html('');
                 $('#slotselection').append(slotHtml);
             } else {

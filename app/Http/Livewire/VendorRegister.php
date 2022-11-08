@@ -18,10 +18,11 @@ class VendorRegister extends Component
 {
     use WithFileUploads;
         public $currentStep = 1;
-        public $salon_title, $mobile, $whatsapp_number,$email,$country,$state,$city,$pin_code,$term_conditions=1,$salon_description,$featured_image,$gst_number,$gst_certificate,$service_for,$service_type,$password;
+        public $salon_title, $mobile, $whatsapp_number,$email,$country,$state,$city,$pin_code,$term_conditions=1,$salon_description,$featured_image,$gst_number,$gst_certificate,$service_for,$password;
         public $successMessage = '';
         public $payment_method=[];
         public $facilities=[];
+        public $service_type = [];
         public $states;
         public $cities;
         public $selectedState = NULL;
@@ -76,7 +77,7 @@ class VendorRegister extends Component
         // dd($this->email);
         $validatedData = $this->validate([
             'service_for' => 'required',
-            'service_type' => 'required',
+            'service_type' => 'nullable',
             'facilities' => 'nullable',
             'password' => 'required|min:6',
         ]);
@@ -105,7 +106,7 @@ class VendorRegister extends Component
             $vendor->about_firm=$this->salon_description;
             $vendor->amenities=json_encode($this->facilities);
             $vendor->payment_methods=json_encode($this->payment_method);
-            $vendor->services=$this->service_type;
+            $vendor->services=json_encode($this->service_type);
             
             $vendor->feature_image = !empty($this->featured_image)? $this->featured_image->store('uploads/vendor/feature', 'public') : '';
             
@@ -128,21 +129,32 @@ class VendorRegister extends Component
             //       $file->move($destinationPath, $file_name);
             //       $vendor->feature_image = $file_name;
             // }
-            if ($vendor->save()) {
-                $vendor=Vendor::find($vendor->id);
-                $words = explode(" ", $vendor->firm_name);
-                $acronym = "";
-                foreach ($words as $w) {
-                    $acronym .= $w[0];
+            $vendor->save();
+            try {
+                if (1) {
+                    $vendor=Vendor::find($vendor->id);
+                    $words = explode(" ", $vendor->firm_name);
+                    $acronym = "";
+                    foreach ($words as $w) {
+                        $acronym .= $w[0];
+                    }
+                    $vendor->vendorId=$acronym.(10000+$vendor->id);
+                    $vendor->update();
                 }
-                $vendor->vendorId=$acronym.(10000+$vendor->id);
-                $vendor->update();
+            } catch (\Throwable $th) {
+                //throw $th;
             }
+            
         }
 
 
         $this->successMessage = 'You salon is registred successfully.';
-        Mail::to($this->email)->send(new EmailWelcomeOwner());
+        try {
+            Mail::to($this->email)->send(new EmailWelcomeOwner());
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+       
         $this->clearForm();
 
         $this->currentStep = 1;
@@ -173,7 +185,7 @@ class VendorRegister extends Component
         $this->gst_certificate='';
         $this->payment_method='';
         $this->service_for='';
-        $this->service_type='';
+        $this->service_type=[];
         $this->facilities='';
         $this->password='';
     }

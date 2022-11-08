@@ -163,7 +163,7 @@
                                 {{-- <hr class="mt-20 mb-45"> --}}
                                 <div class="services-tabs" style="margin: 20px">
                                     <div class="service-sec">
-                                        <h5 >
+                                        <h5>
                                             Services
 
                                             <span id="servicesdetailsheading"></span>
@@ -664,37 +664,43 @@
         }
 
         function Validation(id) {
+            // console.log(id);
             var staffid = $('#staffselect').val();
             var slotselection = $('#slotselection').val();
-            // console.log(staffid);
-            var selectedservices =  $('[name="selectedsubservice"]:checked').val();
+
+            var selectedservices = $('[name="selectedsubservice"]:checked').val();
+            // console.log(selectedservices);
             if (selectedservices === undefined) {
                 $('#servicesdetailsheading').after('<span style="color:red">The Service Selection is required</span>');
 
             }
-            // console.warn(selectedservices);
+            // console.warn(staffid);
             if (staffid === 'null') {
                 $("#staffselect").css({
                     "border": "1px solid",
                     "color": "red"
                 });
+                
                 $('#staffselect').after('<span style="color:red">The Staff Selection is required</span>');
                 // console.log(staffid);
-                if (slotselection === 'null') {
-                    $("#slotselection").css({
-                        "border": "1px solid",
-                        "color": "red"
-                    });
-                    $('#slotselection').after('<span style="color:red">The Slot Selection is required</span>');
-                    return '';
-                }
+
+             
+            }
+
+            if (slotselection === 'null') {
+                $("#slotselection").css({
+                    "border": "1px solid",
+                    "color": "red"
+                });
+                $('#slotselection').after('<span style="color:red">The Slot Selection is required</span>');
+                // return '';
+            }
+
+            if (selectedservices != undefined && slotselection != 'null' && staffid !='null') {
                 selectedform(id);
             }
 
-
-
-
-            
+       
         }
 
         function selectedform(id) {

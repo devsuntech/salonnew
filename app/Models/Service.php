@@ -27,6 +27,7 @@ class Service extends Model
     }
     public function scopeHavingCategories($query, $category_ids)
     {
+        dd($category_ids);
         if ($category_ids == '') {
            return [];
         }

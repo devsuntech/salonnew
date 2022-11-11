@@ -61,8 +61,8 @@
     <script src="/storage/frontend/assets/js/bootstrap.min.js "></script>
     <script src="/storage/frontend/assets/js/slick.min.js "></script>
     <script src="/storage/frontend/assets/js/magnafic.popup.min.js "></script>
-    <script src="/storage/frontend/assets/js/script.js "></script>
-    <script src="/storage/frontend/assets/js/ratings.js "></script>
+    <script src="/storage/frontend/assets/js/script.js"></script>
+    <script src="/storage/frontend/assets/js/ratings.js"></script>
     @yield('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js "
         integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
@@ -102,6 +102,7 @@
             // instead of a settings object
         ]
     });
+    
     $(".my-rating").starRating({
         strokeColor: '#894A00',
         strokeWidth: 10,

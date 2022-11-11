@@ -106,7 +106,7 @@ class VendorRegister extends Component
             $vendor->about_firm=$this->salon_description;
             $vendor->amenities=json_encode($this->facilities);
             $vendor->payment_methods=json_encode($this->payment_method);
-            $vendor->services=json_encode($this->service_type);
+            $vendor->services=$this->service_type;
             
             $vendor->feature_image = !empty($this->featured_image)? $this->featured_image->store('uploads/vendor/feature', 'public') : '';
             

@@ -73,6 +73,15 @@
             color: #777777;
         }
 
+        .book__wrapper{
+            margin: 32px 0px;
+            padding: 4px;
+        }
+
+        .list-sec{
+            font-size: 11px
+        }
+
         @media (min-width: 300px) {
 
             .toppostitoncustom {

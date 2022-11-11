@@ -9,8 +9,8 @@
         }
     </style>
     <div class="clearfix"></div>
-    <main class="pt-100">
-        <div class="listing-details-area pb-100">
+    <main class="pt-40">
+        <div class="listing-details-area pb-70">
             @if (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->count())
                 <div class="news-slider">
                     @foreach (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->get() as $key => $gallery)
@@ -143,15 +143,15 @@
 
 
 
-                                <hr class="mt-45 mb-45">
+                               
                                 @if ($vendor->amenities != '')
                                     <div class="service-cat-list">
                                         <h5>Amenities</h5>
                                         <br />
-                                        <ul class="pr-35">
+                                        <ul class="">
                                             @foreach (json_decode($vendor->amenities) as $value)
                                                 <li>
-                                                    <a style="margin-right: 53px !important;"><i
+                                                    <a style=""><i
                                                             class="fal fa-check-circle"></i>{{ $value }}</a>
                                                 </li>
                                             @endforeach
@@ -231,12 +231,20 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div style="display: flex;
+                                        flex-direction: row;
+                                        justify-content: flex-end;margin:20px;">
+                                            <button class="btn btn-primary btn-sm"
+                                            style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;position: absolute;
+                                            margin-left: 191px"
+                                            onclick="Validation('{{ $vendor->id }}')">Book Now</button>
+                                        </div>
                                     </div>
-                                    <button class="btn btn-primary btn-sm"
-                                        style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;"
-                                        onclick="Validation('{{ $vendor->id }}')">Book Now</button>
+                              
+                                  
                                     <br>
                                 </div>
+                                 <hr class="mt-45 mb-45">
                                 <div class="bookwStaff">
                                     <h5>Our Staff</h5>
                                     <div class="row staff">

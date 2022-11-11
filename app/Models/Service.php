@@ -27,6 +27,9 @@ class Service extends Model
     }
     public function scopeHavingCategories($query, $category_ids)
     {
+        if ($category_ids == '') {
+           return [];
+        }
         return $query->whereIn('category_id', $category_ids);
     }
 }

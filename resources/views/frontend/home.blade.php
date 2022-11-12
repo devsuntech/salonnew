@@ -256,11 +256,11 @@
                     <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="offer-sec mb-30 discount-sec">
                             <a href="{{ route('vendor.detail',$vendor->slug) }}">
-                            <div class="thumb">
+                            <div class="thumb" style="max-width: 270px;max-height: 170.7px;min-width: 270px;min-height: 170.7px;">
                                 <img src="{{$vendor->feature_image ? asset('storage/'.$vendor->feature_image) : '/public/placeholdersalon.png' }}"  alt="image">
                             </div>
                             </a>
-                            <div class="content">
+                            <div class="content"> 
                                 <h5 class="title"><a href="{{ route('vendor.detail',$vendor->slug) }}">{{$vendor->firm_name}}</a></h5>
                                 <div class="know-buttons">
                                     <a href="{{ route('vendor.detail',$vendor->slug) }}">Know More <i class="far fa-arrow-right"></i></a>

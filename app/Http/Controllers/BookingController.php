@@ -6,10 +6,8 @@ use App\Models\Booking;
 use App\Models\BookingDetail;
 use App\Models\VendorService;
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
-use App\Mail\EmailBookingOwner;
 use App\Mail\EmailBookingUser;
 use Illuminate\Support\Facades\Mail;
 class BookingController extends Controller
@@ -26,7 +24,8 @@ class BookingController extends Controller
 
     public function vendorBookings(Request $request)
     {
-        $datas=Booking::with('bookingDetail')->latest()->paginate(10);
+        $id = Auth::user()->id;
+        $datas=Booking::where('vendor_id',$id)->with('bookingDetail')->latest()->paginate(10);
         // dd($datas);
         return view('vendor.order.index',compact('datas'));
     }

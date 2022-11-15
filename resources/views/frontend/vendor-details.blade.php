@@ -15,16 +15,16 @@
                 <div class="news-slider">
                     @foreach (App\Models\VendorGallery::whereVendorId($vendor->id)->latest()->get() as $key => $gallery)
                         <div class="news-thumb">
-                            <img src="{{ asset('storage/' . $gallery->image) }}"
+                            <img src="{{ $gallery->image ? asset('storage/' . $gallery->image) : '/placeholdersalon.png' }}"
                                 alt="{{ $vendor->firm_name . $gallery->id }}">
                         </div>
                     @endforeach
                 </div>
             @else
                 <div class="news-slider">
-                    <img src="/public/placeholdersalon.png" alt="1">
-                    <img src="/public/placeholdersalon.png" alt="2">
-                    <img src="/public/placeholdersalon.png" alt="3">
+                    <img src="/placeholdersalon.png" alt="1">
+                    <img src="/placeholdersalon.png" alt="2">
+                    <img src="/placeholdersalon.png" alt="3">
                 </div>
             @endif
             <div class="news-content">
@@ -43,11 +43,12 @@
                                             <div class="author-meta d-md-flex">
                                                 <div class="rating-2 mr-13  mb-10 mb-sm-0">
                                                     <span>{{ $rating ?? '' }}</span>
-                                                    <i class="fas fa-star icon-default"></i>
-                                                    <i class="fas fa-star icon-default"></i>
-                                                    <i class="fas fa-star icon-default"></i>
-                                                    <i class="fas fa-star icon-default"></i>
-                                                    <i class="fal fa-star icon-default"></i>
+                                                    @for ($i = 1; $i <= $rating; $i++)
+                                                        <i class="fas fa-star icon-default "></i>
+                                                    @endfor
+                                                    @for ($j = 1; $j <= 5 - $rating; $j++)
+                                                        <i class="fal fa-star icon-default "></i>
+                                                    @endfor
                                                 </div>
                                                 <div class="duration d-inline-block">
                                                     {{-- <i class="fal fa-clock icon-default"></i><span> Posted 8 hours
@@ -93,57 +94,10 @@
                     <div class="news-description">
                         <div class="row">
                             <div class="col-xl-8 col-lg-7">
-                                {{-- <div class="desc-box  mb-16">
-                                    <p><span class="first-letter">S</span> Silver Rose Hotel at Novia offers fully furnished
-                                        apartments to fit the needs of our pure guests visiting the <a
-                                            href="contact.html">New York Metro</a> Area and is conveniently located
-                                        in the vibrant community of Hoboken.</p>
-                                </div>
-                                <p>Novia's spaciously two bedroom apartments are perfect for families and even business
-                                    partners. Look out into the Manhattan skyline from the open fully equipped kitchen.
-                                    These two bedroom apartments are a perfect example
-                                    of unparalleled ambiance offering spectacular views. Decorated to Dharma Home Suites
-                                    feng shui style, you can relax at their accommodation peacefully and privately.</p> --}}
-                                {{-- <hr class="mt-47 mb-45"> --}}
-                                {{-- <div class="info">
-                                    <h5>The space</h5>
-                                    It’s quite obvious that Novia was built with the intention to please. For those who are
-                                    fitness fanatics, there is an on-site Real Hot Yoga studio. There is a rooftop terrace
-                                    on the 7th floor that offers spectacular views of Hoboken. Arriving later than
-                                    planned? Don’t fret, there’s a 24-hour check-in available for your convenience.
-                                    <hr class="mt-47 mb-45">
-                                    <div class="service-wrapper">
-                                        <div class="single-service">
-                                            <div class="service-icon f-left"><i class="fal fa-home-lg-alt"></i></div>
-                                            <div class="service-desc fix">
-                                                <h5><a href="listing-details.html">Entire home</a></h5>
-                                                <p>There is a rooftop terrace on the 7th floor that offers<br> spectacular
-                                                    views of Hoboken.</p>
-                                            </div>
-                                        </div>
-                                        <div class="single-service">
-                                            <div class="service-icon f-left"><i class="fal fa-paint-roller"></i></div>
-                                            <div class="service-desc fix">
-                                                <h5><a href="listing-details.html">Enhanced Clean</a></h5>
-                                                <p>This host committed to Airbnb's 5-step enhanced cleaning process. <a
-                                                        href="listing-details.html">Learn more</a></p>
-                                            </div>
-                                        </div>
-                                        <div class="single-service">
-                                            <div class="service-icon f-left"><i class="fal fa-paint-roller"></i></div>
-                                            <div class="service-desc fix">
-                                                <h5><a href="listing-details.html">Cancellation policy</a></h5>
-                                                <p>Cancel before 3:00 PM on Dec 1 and get a 50% refund, minus the first
-                                                    night and<br> service fee. Get details</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div> --}}
 
 
 
-                               
+
                                 @if ($vendor->amenities != '')
                                     <div class="service-cat-list">
                                         <h5>Amenities</h5>
@@ -160,398 +114,171 @@
                                     <hr class="mt-20 mb-45">
                                 @endif
 
-                                {{-- <hr class="mt-20 mb-45"> --}}
-                                <div class="services-tabs" style="margin: 20px">
-                                    <div class="service-sec">
-                                        <h5>
-                                            Services
+                                @if ($vendorDetails->count())
+                                    <hr class="mt-20 mb-45">
+                                    <div class="services-tabs" style="margin: 20px">
+                                        <div class="service-sec">
+                                            <h5>
+                                                Services
 
-                                            <span id="servicesdetailsheading"></span>
-                                        </h5>
-                                        {{-- @php
+                                                <span id="servicesdetailsheading"></span>
+                                            </h5>
+                                            {{-- @php
                                            dd($vendorDetails);
                                         @endphp --}}
-                                        <div class="tab">
-                                            @foreach ($vendorDetails as $key => $vendorvalue)
-                                                <button class="tablinks"
-                                                    onclick="openCity(event, 'serv{{ $key }}')"
-                                                    id="defaultOpen">{{ $vendorvalue[0]->vendorservicedetails->name }}</button>
-                                            @endforeach
+                                            <div class="tab">
+                                                @foreach ($vendorDetails as $key => $vendorvalue)
+                                                    <button class="tablinks"
+                                                        onclick="openCity(event, 'serv{{ $key }}')"
+                                                        id="defaultOpen">{{ $vendorvalue[0]->vendorservicedetails->name }}</button>
+                                                @endforeach
 
-                                        </div>
-                                        <div>
-                                            @foreach ($vendorDetails as $key => $vendorsubservice)
-                                                <div id="serv{{ $key }}" class="tabcontent ">
-                                                    @foreach ($vendorsubservice as $value)
-                                                        <div class="serv">
-                                                            <div class="left-serv">
-                                                                @php
-                                                                    // dd($value->vendorsubservicedetails);
-                                                                @endphp
-                                                                <h5> {{ $value->vendorsubservicedetails->name }} </h5>
-                                                                <span class="serivce-time">{{ $value->minimum_time }} -
-                                                                    {{ $value->maximum_time }}</span>
+                                            </div>
+                                            <div>
+                                                @foreach ($vendorDetails as $key => $vendorsubservice)
+                                                    <div id="serv{{ $key }}" class="tabcontent ">
+                                                        @foreach ($vendorsubservice as $value)
+                                                            <div class="serv">
+                                                                <div class="left-serv">
+                                                                    @php
+                                                                        // dd($value->vendorsubservicedetails);
+                                                                    @endphp
+                                                                    <h5> {{ $value->vendorsubservicedetails->name }} </h5>
+                                                                    <span class="serivce-time">{{ $value->minimum_time }} -
+                                                                        {{ $value->maximum_time }}</span>
+                                                                </div>
+                                                                <div class="right-serv" style="display: flex">
+                                                                    <h5>₹{{ $value->price }}</h5>
+                                                                    <input type="checkbox" name="selectedsubservice"
+                                                                        value='{"price":"{{ $value->price }}","subserviceid":"{{ $value->subservice_id }}","subservicename":"{{ $value->vendorsubservicedetails->name }}","subserviceminute":"{{ $value->minimum_time }}","vendorserviceid":"{{ $value->id }}"}' />
+                                                                </div>
                                                             </div>
-                                                            <div class="right-serv" style="display: flex">
-                                                                <h5>₹{{ $value->price }}</h5>
-                                                                <input type="checkbox" name="selectedsubservice"
-                                                                    value='{"price":"{{ $value->price }}","subserviceid":"{{ $value->subservice_id }}","subservicename":"{{ $value->vendorsubservicedetails->name }}","subserviceminute":"{{ $value->minimum_time }}","vendorserviceid":"{{ $value->id }}"}' />
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                                {{-- <button class="btn btn-primary btn-sm" style="float: right;">Submit</button> --}}
+                                            </div>
+                                            <div>
+                                                <div class="servicedetails">
+                                                    <select class="form-control" id="staffselect">
+                                                        <option value="null">Select Staff</option>
+                                                        <option value="0">No Prefrernce</option>
+                                                        @foreach ($staff as $staffsingle)
+                                                            <option value="{{ $staffsingle->id }}">
+                                                                {{ $staffsingle->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                            @endforeach
-                                            {{-- <button class="btn btn-primary btn-sm" style="float: right;">Submit</button> --}}
-                                        </div>
-                                        <div>
-                                            <div class="servicedetails">
-                                                <select class="form-control" id="staffselect">
-                                                    <option value="null">Select Staff</option>
-                                                    <option value="0">No Prefrernce</option>
-                                                    @foreach ($staff as $staffsingle)
-                                                        <option value="{{ $staffsingle->id }}">{{ $staffsingle->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="servicedetails">
-                                                <input type="date" id="appointmentdate" name="appointmentime"
-                                                    class="form-control"
-                                                    value="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
-                                                    min="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
-                                                    onchange="onselectDate(event)">
-                                            </div>
-                                            <div class="servicedetails">
-                                                <select class="form-control" id="slotselection">
+                                                <div class="servicedetails">
+                                                    <input type="date" id="appointmentdate" name="appointmentime"
+                                                        class="form-control"
+                                                        value="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
+                                                        min="{{ Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('Y-m-d') }}"
+                                                        onchange="onselectDate(event)">
+                                                </div>
+                                                <div class="servicedetails">
+                                                    <select class="form-control" id="slotselection">
 
-                                                    {{-- @foreach ($slots as $key => $slot)
+                                                        {{-- @foreach ($slots as $key => $slot)
                                                         <option value="{{ $slotsValue[$key] }}">{{ $slot }}
                                                         </option>
                                                     @endforeach --}}
-                                                </select>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div style="display: flex;
+                                            <div
+                                                style="display: flex;
                                         flex-direction: row;
                                         justify-content: flex-end;margin:20px;">
-                                            <button class="btn btn-primary btn-sm"
-                                            style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;position: absolute;
+                                                <button class="btn btn-primary btn-sm"
+                                                    style="float: right;padding:10px 20px;background:#f9c1b6;border: #f9c1b6;position: absolute;
                                             margin-left: 191px"
-                                            onclick="Validation('{{ $vendor->id }}')">Book Now</button>
+                                                    onclick="Validation('{{ $vendor->id }}')">Book Now</button>
+                                            </div>
+                                        </div>
+
+
+                                        <br>
+                                    </div>
+                                @endif
+
+                                @if (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->count())
+                                    <hr class="mt-45 mb-45">
+                                    <div class="bookwStaff">
+                                        <h5>Our Staff</h5>
+                                        <div class="row staff">
+                                            @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
+                                                <div class="col-lg-3 Staff text-center">
+                                                    <a>
+                                                        <div class=" staff-img ">
+                                                            <img src="{{ asset('storage/' . $staff->profile_pic) }}">
+                                                        </div>
+                                                        <h5>{{ Str::words($staff->name, 1) }}</h5>
+                                                        @php
+                                                            $staff_services = App\Models\Service::whereIn('id', json_decode($staff->services))
+                                                                ->pluck('name')
+                                                                ->toArray();
+                                                        @endphp
+                                                        <span>{{ implode(', ', $staff_services) }}</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
-                              
-                                  
-                                    <br>
-                                </div>
-                                 <hr class="mt-45 mb-45">
-                                <div class="bookwStaff">
-                                    <h5>Our Staff</h5>
-                                    <div class="row staff">
-                                        @foreach (App\Models\VendorStaff::whereVendorId($vendor->id)->orderBy('name')->get() as $staff)
-                                            <div class="col-lg-3 Staff text-center">
-                                                <a>
-                                                    <div class=" staff-img ">
-                                                        <img src="{{ asset('storage/' . $staff->profile_pic) }}">
+                                @endif
+
+
+                                @if ($ratings->count())
+                                    <hr class="mt-20 mb-45 ">
+                                    <div class="review-box pb-36 ">
+                                        <h5 class="has-border mb-40 ">User Reviews</h5>
+                                        <div class="review-list ">
+                                            @foreach ($ratings as $val)
+                                                <div class="single-review fix pb-32 mb-40 ">
+                                                    <div class="review-thumb f-review-thumb f-left mr-40 ">
+                                                        @if ($val->customerDetail->avatar)
+                                                            <img src="assets/img/user-1.png" alt=" ">
+                                                        @else
+                                                            <div class="desc-box">
+                                                                <span
+                                                                    class="first-letter">{{ substr(optional($val->customerDetail)->name, 0, 1) }}</span>
+                                                            </div>
+                                                        @endif
+
                                                     </div>
-                                                    <h5>{{ Str::words($staff->name, 1) }}</h5>
-                                                    @php
-                                                        $staff_services = App\Models\Service::whereIn('id', json_decode($staff->services))
-                                                            ->pluck('name')
-                                                            ->toArray();
-                                                    @endphp
-                                                    <span>{{ implode(', ', $staff_services) }}</span>
-                                                </a>
-                                            </div>
-                                        @endforeach
+                                                    <div class="review-content fix mt-11 ">
+                                                        <div class="content-top ">
+                                                            <h5><a href="news.html ">{{ $val->customerDetail->name }}</a>
+                                                            </h5>
+                                                            <p>{{ $val->rating_review }} </p>
+                                                            <hr>
+                                                        </div>
+                                                        <div class="content-bottom ">
+                                                            <div class="review-rating-wrapper d-inline-block ">
+                                                                <div class="single-rating mb-5-px ">
+                                                                    <div class="rating rating-3 ">
+                                                                        <span>Rating</span>
+                                                                        @for ($i = 1; $i <= $val->rating_number; $i++)
+                                                                            <i class="fas fa-star icon-default "></i>
+                                                                        @endfor
+                                                                        @for ($j = 1; $j <= 5 - $val->rating_number; $j++)
+                                                                            <i class="fal fa-star icon-default "></i>
+                                                                        @endfor
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
 
 
 
-                                <hr class="mt-20 mb-45 ">
-                                {{-- <div class="review-box pb-36 ">
-                                    <h5 class="has-border mb-40 ">User Reviews</h5>
-                                    <div class="review-list ">
-                                        <div class="single-review fix pb-32 mb-40 ">
-                                            <div class="review-thumb f-review-thumb f-left mr-40 ">
-                                                <img src="assets/img/user-1.png " alt=" ">
-                                            </div>
-                                            <div class="review-content fix mt-11 ">
-                                                <div class="content-top ">
-                                                    <h5><a href="news.html ">Rosalina D. William</a></h5>
-                                                    <p>It was popularised in the sheets containing lorem ipsum is simply
-                                                        free text.<br>It has survived not only five centuries, but also the
-                                                        leap. </p>
-                                                    <hr>
-                                                </div>
-                                                <div class="content-bottom ">
-                                                    <div class="review-rating-wrapper d-inline-block mr-45 ">
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Rating</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Services</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-rating-wrapper d-inline-block ">
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Hospitality</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Pricing</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="single-review fix pb-32 mb-40 ">
-                                            <div class="review-thumb f-review-thumb f-left mr-40 ">
-                                                <img src="assets/img/user-2.png " alt=" ">
-                                            </div>
-                                            <div class="review-content fix mt-11 ">
-                                                <div class="content-top ">
-                                                    <h5><a href="news.html ">Rosalina D. William</a></h5>
-                                                    <p>It was popularised in the sheets containing lorem ipsum is simply
-                                                        free text.<br>It has survived not only five centuries, but also the
-                                                        leap. </p>
-                                                    <hr>
-                                                </div>
-                                                <div class="content-bottom ">
-                                                    <div class="review-rating-wrapper d-inline-block mr-45 ">
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Rating</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Services</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-rating-wrapper d-inline-block ">
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Hospitality</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Pricing</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="single-review fix border-0 ">
-                                            <div class="review-thumb f-review-thumb f-left mr-40 ">
-                                                <img src="assets/img/user-3.png " alt=" ">
-                                            </div>
-                                            <div class="review-content fix mt-11 ">
-                                                <div class="content-top ">
-                                                    <h5><a href="news.html ">Rosalina D. William</a></h5>
-                                                    <p>It was popularised in the sheets containing lorem ipsum is simply
-                                                        free text.<br>It has survived not only five centuries, but also the
-                                                        leap. </p>
-                                                    <hr>
-                                                </div>
-                                                <div class="content-bottom ">
-                                                    <div class="review-rating-wrapper d-inline-block mr-45 ">
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Rating</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Services</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-rating-wrapper d-inline-block ">
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Hospitality</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="single-rating mb-5-px ">
-                                                            <div class="rating rating-3 ">
-                                                                <span>Pricing</span>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fas fa-star icon-default "></i>
-                                                                <i class="fal fa-star icon-default "></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="review-form ">
-                                    <h5 class="has-border mb-27 ">Write a Review</h5>
-                                    <form action="# ">
-                                        <div class="content-bottom pb-43 ">
-                                            <div class="review-rating-wrapper d-inline-block mr-45 ">
-                                                <div class="single-rating mb-5-px ">
-                                                    <div class="rating rating-3 ">
-                                                        <span>Rating</span>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fal fa-star icon-default "></i>
-                                                    </div>
-                                                </div>
-                                                <div class="single-rating mb-5-px ">
-                                                    <div class="rating rating-3 ">
-                                                        <span>Services</span>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fal fa-star icon-default "></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="review-rating-wrapper d-inline-block ">
-                                                <div class="single-rating mb-5-px ">
-                                                    <div class="rating rating-3 ">
-                                                        <span>Hospitality</span>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fal fa-star icon-default "></i>
-                                                    </div>
-                                                </div>
-                                                <div class="single-rating mb-5-px ">
-                                                    <div class="rating rating-3 ">
-                                                        <span>Pricing</span>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fas fa-star icon-default "></i>
-                                                        <i class="fal fa-star icon-default "></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="review-main mb-50 mb-lg-0 ">
-                                            <div class="row custom-row-2 ">
-                                                <div class="col-xl-6 custom-col-2 ">
-                                                    <div class="input-group mb-20 ">
-                                                        <input type="text " placeholder="Title of your Review "
-                                                            name="rtitle " class="input-default ">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 custom-col-2 ">
-                                                    <div class="input-group mb-20 ">
-                                                        <input type="text " placeholder="Website name " name="wname "
-                                                            class="input-default ">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 custom-col-2 ">
-                                                    <div class="input-group mb-20 ">
-                                                        <input type="text " placeholder="Enter full name "
-                                                            name="fname " class="input-default ">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6 custom-col-2 ">
-                                                    <div class="input-group mb-20 ">
-                                                        <input type="email " placeholder="Your email " name="fname "
-                                                            class="input-default ">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 custom-col-2 ">
-                                                    <div class="input-group mb-25 ">
-                                                        <textarea name="message " class="textarea-default " id="message " cols="30 " rows="10 ">Enter message</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 custom-col-2 ">
-                                                    <div class="form-group mb-20 ">
-                                                        <div class="review-condition ">
-                                                            <input type="checkbox " name="condition " id="condition ">
-                                                            <label for="condition ">Save my name, email, and website in
-                                                                this browser for the next time I comment.</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 custom-col-2 ">
-                                                    <button type="submit " class="btn-default ">Submit Now <i
-                                                            class="fal fa-paper-plane "></i> </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div> --}}
                             </div>
                             <div class="col-xl-4 col-lg-5 ">
                                 <div class="sidebar-wrapper ">
@@ -688,11 +415,11 @@
                     "border": "1px solid",
                     "color": "red"
                 });
-                
+
                 $('#staffselect').after('<span style="color:red">The Staff Selection is required</span>');
                 // console.log(staffid);
 
-             
+
             }
 
             if (slotselection === 'null') {
@@ -704,11 +431,11 @@
                 // return '';
             }
 
-            if (selectedservices != undefined && slotselection != 'null' && staffid !='null') {
+            if (selectedservices != undefined && slotselection != 'null' && staffid != 'null') {
                 selectedform(id);
             }
 
-       
+
         }
 
         function selectedform(id) {

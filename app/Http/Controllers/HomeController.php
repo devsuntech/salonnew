@@ -120,15 +120,19 @@ class HomeController extends Controller
         if ($vendor=Vendor::whereSlug($slug)->first()) {
             $vendorDetails = VendorService::where('vendor_id',$vendor->id)->get()->groupBy('service_id');
             $staff = VendorStaff::where('vendor_id',$vendor->id)->get();
-            $rating = Booking::where('rating_number','!=',0)->where('vendor_id',$vendor->id)->avg('rating_number');
+            $ratings = Booking::where('rating_number','!=',0)->where('vendor_id',$vendor->id)->get();
+            $rating =  $ratings->avg('rating_number');
+            // dd($rating);
+            $rating = (int) $rating;
             // dd($rating);
             if ($rating) {
                 $rating = number_format($rating,1);
+                // dd($rating);
             }else{
                 $rating = 3;
             }
             
-            return view('frontend.vendor-details',compact('vendorDetails','vendor','rating','staff'));
+            return view('frontend.vendor-details',compact('vendorDetails','vendor','rating','staff','ratings'));
         } else{
             abort(404);
         }

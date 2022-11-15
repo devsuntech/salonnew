@@ -57,6 +57,11 @@
             -webkit-filter: drop-shadow(-2px -2px 2px #888);
             filter: drop-shadow(-2px -2px 2px #888);
         }
+        @media only screen and (max-width: 600px) {
+            .checkbox-sec{
+                flex-direction: column;
+            }
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
